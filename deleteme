@@ -1,0 +1,23 @@
+sudo apt install \
+      wine/jessie-backports \
+      wine32/jessie-backports \
+      wine64/jessie-backports \
+      libwine/jessie-backports \
+      libwine:i386/jessie-backports \
+      fonts-wine/jessie-backports
+
+      apt-get autoremove
+
+
+      The following extra packages will be installed:
+  ocl-icd-libopencl1 ocl-icd-libopencl1:i386
+Suggested packages:
+  ttf-mscorefonts-installer ttf-mscorefonts-installer:i386 opencl-icd
+  opencl-icd:i386 winetricks playonlinux wine-binfmt dosbox
+  wine32-preloader:i386 wine64-preloader
+Recommended packages:
+  fonts-wine:i386
+The following NEW packages will be installed:
+  fonts-wine ocl-icd-libopencl1 ocl-icd-libopencl1:i386 wine
+The following packages will be upgraded:
+  libwine libwine:i386 wine32:i386 wine64
