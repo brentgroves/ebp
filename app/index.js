@@ -5,7 +5,11 @@ import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
-import './app.global.css';
+import './css/app.global.css';
+import * as PORTSTATE from "./actions/port/PORTState.js"
+import * as PORTCHK from "./actions/common/ChkConst.js"
+import * as PROGRESSBUTTON from "./actions/common/ProgressButtonConst.js"
+
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);

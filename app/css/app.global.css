@@ -1,0 +1,737 @@
+@import "~font-awesome/css/font-awesome.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~bootstrap/dist/css/bootstrap-theme.min.css";
+
+
+body {
+  background: url("../images/background.jpg") no-repeat center center fixed; 
+}
+
+.jumbotron {
+  background-image: url("../images/banner.jpg");
+  background-size: 'cover';  
+  padding: 0px 10px 0px 20px; 
+  margin-left:15;
+  margin-right:15;
+
+}
+.text-black {
+  color:black;
+}
+
+/* for big buttons */
+.tg  {border-collapse: separate;border-spacing:20px;}
+.tg td{border-spacing:20px !important;font-family:Arial, sans-serif;font-size:14px;padding:20px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:20px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .btnPrimary{
+    display: inline-block; /* this has been added */
+    border-radius: 15px;
+
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  vertical-align:top
+}
+.tg .btnSuccess{
+    border-radius: 15px;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.tg .btnInfo{
+    border-radius: 15px;
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  vertical-align:top
+}
+
+.tg .btnWarning{
+    border-radius: 15px;
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  vertical-align:top
+}
+.tg .btnDanger{
+    border-radius: 15px;
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  vertical-align:top
+}
+.tg .btnWhite{
+    border-radius: 15px;
+  color: #fff;
+  background-color: #fff;
+  border: 1px solid #e5e9ec;
+  vertical-align:top
+}
+
+.tg td:hover {
+  background: #FFF842;
+  color: #403E10;
+  font-weight: bolder;
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+  transition-timing-function: line;
+
+
+//  background: red;
+//  color:green;
+  font-size:18px;
+  font-weight:bolder;
+}
+
+
+/* react-progress-botton */
+.pb-container {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+.pb-container .pb-button {
+  /*
+  background: transparent;
+  border: 2px solid currentColor;
+  color: currentColor;
+  */
+
+  border-radius: 27px;
+  border: 2px solid #2C3446;
+  background-color: #323C50;;
+
+  color: black;
+  cursor: pointer;
+  padding: 0.7em 1em;
+  text-decoration: none;
+  text-align: center;
+  height: 54px;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition: background-color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s, border-radius 0.3s;
+}
+.pb-container .pb-button span {
+  display: inherit;
+  transition: opacity 0.3s 0.1s;
+  font-size: 2em;
+  font-weight: 100;
+}
+.pb-container .pb-button svg {
+  height: 54px;
+  width: 54px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.pb-container .pb-button svg path {
+  opacity: 0;
+  fill: none;
+}
+.pb-container .pb-button svg.pb-progress-circle {
+  animation: spin 0.9s infinite cubic-bezier(0.085, 0.260, 0.935, 0.710);
+}
+.pb-container .pb-button svg.pb-progress-circle path {
+  stroke: currentColor;
+  stroke-width: 5;
+}
+.pb-container .pb-button svg.pb-checkmark path,
+.pb-container .pb-button svg.pb-cross path {
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+.pb-container.disabled .pb-button {
+  cursor: not-allowed;
+}
+.pb-container.loading .pb-button {
+  width: 54px;
+  border-width: 6.5px;
+  border-color: #ddd;
+  cursor: wait;
+  background-color: transparent;
+  /*
+  background-color: #323C50;;
+  color: black;
+  */
+/*
+  background-color: transparent;
+  */
+  padding: 0;
+}
+.pb-container.loading .pb-button span {
+  transition: all 0.15s;
+  opacity: 0;
+  display: none;
+}
+.pb-container.loading .pb-button .pb-progress-circle > path {
+  transition: opacity 0.15s 0.3s;
+  opacity: 1;
+}
+.pb-container.success .pb-button {
+  border-color: #A0D468;
+  background-color: #A0D468;
+}
+.pb-container.success .pb-button span {
+  transition: all 0.15s;
+  opacity: 0;
+  display: none;
+}
+.pb-container.success .pb-button .pb-checkmark > path {
+  opacity: 1;
+}
+.pb-container.error .pb-button {
+  border-color: #ED5565;
+  background-color: #ED5565;
+}
+.pb-container.error .pb-button span {
+  transition: all 0.15s;
+  opacity: 0;
+  display: none;
+}
+.pb-container.error .pb-button .pb-cross > path {
+  opacity: 1;
+}
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+    transform-origin: center center;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+    transform-origin: center center;
+  }
+}
+
+/* react-datagrid */
+.react-datagrid,
+.react-datagrid * {
+  box-sizing: border-box;
+}
+.react-datagrid .z-resize-proxy {
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  display: none;
+  width: 3px;
+  z-index: 1000;
+  border-left: 1px solid #868686;
+}
+.react-datagrid.z-columns-resizable .z-resize-proxy {
+  display: block;
+}
+.react-datagrid {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-flow: column;
+  -o-flex-flow: column;
+  flex-flow: column;
+  flex-flow: column;
+  box-orient: vertical;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+              -ms-grid-row-align: stretch;
+          align-items: stretch;
+}
+.react-datagrid .z-row,
+.react-datagrid .react-datagrid-pagination-toolbar {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.react-datagrid .loadmask {
+  z-index: 100;
+}
+.react-datagrid .z-header-menu-column {
+  z-index: 100;
+}
+.react-datagrid > .z-inner {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-flow: column;
+  -o-flex-flow: column;
+  flex-flow: column;
+  flex-flow: column;
+  box-orient: vertical;
+}
+.react-datagrid > .z-inner .z-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-flow: column;
+  -o-flex-flow: column;
+  flex-flow: column;
+  flex-flow: column;
+  box-orient: vertical;
+  -webkit-box-flex: 1 1 auto;
+  -ms-box-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.react-datagrid .z-header-wrapper,
+.react-datagrid .z-footer-wrapper {
+  width: 100%;
+}
+.react-datagrid .z-table {
+  display: block;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+/** 2 RULES FOR SAFARI VERTICAL SCROLLBAR */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+          transform: translate3d(0px, 0px, 0px);
+  position: relative;
+  z-index: 10;
+}
+.react-datagrid .z-header,
+.react-datagrid .z-summary,
+.react-datagrid .z-table .z-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-flow: row;
+  -o-flex-flow: row;
+  flex-flow: row;
+  flex-flow: row;
+  box-orient: horizontal;
+  z-index: 1;
+}
+.react-datagrid .z-mask-wrapper {
+  bottom: 0px;
+  width: 100%;
+  position: absolute;
+  display: none;
+}
+.react-datagrid.z-loading .z-mask-wrapper {
+  display: block;
+}
+.react-datagrid.z-empty .z-content-wrapper-fix {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.react-datagrid.z-empty .z-table-wrapper {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-flow: column;
+  -o-flex-flow: column;
+  flex-flow: column;
+  flex-flow: column;
+  box-orient: vertical;
+  -webkit-box-pack: center;
+          justify-content: center;
+  flex-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
+}
+.react-datagrid.z-empty .z-empty-text {
+  width: 100%;
+  -webkit-box-pack: center;
+          justify-content: center;
+  flex-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-style: italic;
+  color: #808080;
+}
+.react-datagrid .z-header-menu-column {
+  background: #fff;
+  position: absolute;
+  top: 0px;
+}
+.react-datagrid .z-header-menu-column .menu-row {
+  touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.react-datagrid .z-header-menu-column .menu-row.over {
+  background: #d7e7ff;
+}
+.react-datagrid .z-header {
+  -webkit-box-align: stretch /* for vertical aligning text in header */;
+      -ms-flex-align: stretch /* for vertical aligning text in header */;
+              -ms-grid-row-align: stretch /* for vertical aligning text in header */;
+          align-items: stretch /* for vertical aligning text in header */;
+}
+.react-datagrid.z-with-column-menu .z-column-header .z-show-filter,
+.react-datagrid.z-with-column-menu .z-column-header .z-show-menu {
+  display: none;
+  position: absolute;
+  cursor: pointer;
+  right: 0px;
+  top: 0px;
+  width: 15px;
+  height: 100%;
+  border-left: 1px solid #a8a8a8;
+}
+.react-datagrid.z-with-column-menu .z-column-header .z-show-filter {
+  right: 15px;
+  background: #fff;
+}
+.react-datagrid.z-with-column-menu .z-column-header.z-filterable .z-show-filter.z-active,
+.react-datagrid.z-with-column-menu .z-column-header.z-filterable .z-show-filter:hover,
+.react-datagrid.z-with-column-menu .z-column-header .z-show-menu.z-active,
+.react-datagrid.z-with-column-menu .z-column-header .z-show-menu:hover {
+  background: #fff;
+}
+.react-datagrid.z-with-column-menu .z-column-header.z-active .z-show-menu,
+.react-datagrid.z-with-column-menu .z-column-header.z-active.z-filterable .z-show-filter,
+.react-datagrid.z-with-column-menu .z-column-header.z-over .z-show-menu {
+  display: block;
+}
+.react-datagrid.z-with-column-menu .z-column-header.z-over.z-filterable .z-show-filter {
+  display: block;
+}
+.react-datagrid.z-with-column-menu .z-column-header.z-filtered {
+  font-style: italic;
+}
+.react-datagrid .z-header-wrapper {
+  -webkit-box-flex: 0 0 auto;
+  -ms-box-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  background: -webkit-linear-gradient(top, #f7f7f7 0%, #efefef 13%, #e6e6e6 100%);
+  background: linear-gradient(to bottom, #f7f7f7 0%, #efefef 13%, #e6e6e6 100%);
+  border-bottom: 1px solid #a8a8a8;
+}
+.react-datagrid .z-header-wrapper.z-dragging .z-column-header:not(.z-drag) {
+  -webkit-transition: left 0.4s;
+  transition: left 0.4s;
+}
+.react-datagrid .z-column-header {
+  position: relative;
+  font-weight: bold;
+  color:#666B85;
+  background:#323C50;
+  font-size:20px;
+  font-weight:bolder;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+
+}
+/*
+.react-datagrid .z-column-header {
+  position: relative;
+  font-weight: bold;
+}
+*/
+.react-datagrid .z-column-header .z-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-flow: row;
+  -o-flex-flow: row;
+  flex-flow: row;
+  flex-flow: row;
+  box-orient: horizontal;
+  height: 100%;
+}
+.react-datagrid .z-column-header .z-content {
+  cursor: default;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.react-datagrid .z-column-header.z-sortable .z-inner {
+  cursor: pointer;
+}
+.react-datagrid .z-column-header.z-over {
+  position: relative;
+  font-weight: bold;
+  color:#666B85;
+  background:#323C50;
+  font-size:20px;
+  font-weight:bolder;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+
+}
+
+/*
+.react-datagrid .z-column-header.z-over {
+  background: -webkit-linear-gradient(top, #fbfbfb 0%, #f8f8f8 13%, #f4f4f4 100%);
+  background: linear-gradient(to bottom, #fbfbfb 0%, #f8f8f8 13%, #f4f4f4 100%);
+}
+*/
+.react-datagrid .z-column-header .z-icon-sort-info {
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  margin-left: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.react-datagrid .z-column-header.z-asc .z-icon-sort-info {
+  border-bottom: 8px solid #6eb8f1;
+}
+.react-datagrid .z-column-header.z-desc .z-icon-sort-info {
+  border-top: 8px solid #6eb8f1;
+}
+.react-datagrid .z-column-header.z-drag {
+  z-index: 1;
+  background: -webkit-linear-gradient(top, #fbfbfb 0%, #f8f8f8 13%, #f4f4f4 100%);
+  background: linear-gradient(to bottom, #fbfbfb 0%, #f8f8f8 13%, #f4f4f4 100%);
+  border-right: 1px solid #a8a8a8;
+  border-left: 1px solid #a8a8a8;
+}
+.react-datagrid .z-column-header .z-column-resize {
+  display: inline-block;
+  height: 100%;
+  width: 3px;
+  right: 0px;
+  cursor: e-resize;
+  top: 0px;
+  position: absolute;
+  z-index: 10;
+}
+.react-datagrid .z-column-header.z-last .z-inner .z-column-resize {
+  display: none !important;
+}
+.react-datagrid .z-header .z-column-header.z-cell:not(.z-first) {
+  border-left: 1px solid #a8a8a8;
+}
+.react-datagrid .z-header .z-column-header.z-cell.z-last {
+  border-right: 1px solid #a8a8a8;
+}
+.react-datagrid.z-style-alternate .z-odd.z-row {
+  background: #f2f7ff;
+}
+.react-datagrid .z-column-content {
+  overflow: visible;
+}
+.react-datagrid.z-cell-ellipsis .z-row .z-cell .z-content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.react-datagrid .z-row.z-over,
+.react-datagrid .z-row.z-over.z-odd {
+  background: red;
+  background: #d7e7ff; 
+}
+.react-datagrid .z-row.z-selected,
+.react-datagrid .z-row.z-selected.z-odd {
+  background: #c4dbfc;
+}
+.react-datagrid .z-row .z-cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: default;
+}
+.react-datagrid .z-row .z-cell .z-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px 5px;
+
+}
+/*
+.react-datagrid .z-group-cell {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+
+}
+*/
+.react-datagrid .z-group-cell .z-content {
+  display: block;
+  width: 280px;
+    position:absolute;
+    text-align:right;
+}
+
+.react-datagrid .z-group-cell {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+
+}
+
+.react-datagrid .z-group-cell:before {
+    content:'PO/Receiver: ';
+    position:absolute;
+    width: 125px;
+    text-align:right;
+
+}
+
+/*
+   // display: none;
+
+    float: left;
+    position: absolute;
+    padding-right: 10;
+
+.react-datagrid .z-group-cell:after {
+ content: 'Receiver:';
+    display: block;
+    float: left;
+    position: absolute;
+
+}
+*/
+
+.react-datagrid .z-group-row {
+//  color: #FB667A;
+//  background: #e6e6e6; 
+}
+
+.react-datagrid .z-group-row.z-row.z-odd {
+  background: steelblue;
+  color:#2C3446;
+  font-size:18px;
+  font-weight:bolder;
+}
+.react-datagrid .z-group-row.z-row.z-odd.z-over {
+  background: #FFF842;
+  color: #403E10;
+  font-weight: bolder;
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+  transition-timing-function: line;
+
+
+//  background: red;
+//  color:green;
+  font-size:18px;
+  font-weight:bolder;
+}
+
+/*.react-datagrid .z-grouped.z-row.z-even.z-over {*/
+.react-datagrid .z-grouped.z-row.z-odd.z-over .z-content,
+.react-datagrid .z-grouped.z-row.z-even.z-over .z-content {
+  background: #FFF842;
+  color: #403E10;
+  font-weight: bolder;
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+  transition-timing-function: line;
+
+
+//  background: red;
+//  color:green;
+  font-size:18px;
+  font-weight:bolder;
+}
+
+
+.react-datagrid.z-cell-borders-horizontal .z-cell:not(.z-column-header) {
+  border-bottom: 1px dotted #a8a8a8;
+}
+.react-datagrid.z-cell-borders-vertical .z-group-row .z-cell:not(.z-column-header),
+.react-datagrid.z-cell-borders-vertical .z-cell.z-last:not(.z-column-header) {
+  border-right: 1px dotted #a8a8a8;
+}
+.react-datagrid.z-cell-borders-vertical .z-cell:not(.z-first):not(.z-column-header) {
+  border-left: 1px dotted #a8a8a8;
+}
+.react-datagrid .z-footer-wrapper {
+  background: -webkit-linear-gradient(top, #f7f7f7 0%, #efefef 13%, #e6e6e6 100%);
+  background: linear-gradient(to bottom, #f7f7f7 0%, #efefef 13%, #e6e6e6 100%);
+}
+.react-datagrid .z-summary {
+  border-top: 1px solid #a8a8a8;
+  -webkit-box-align: stretch /* for vertical aligning text in header */;
+      -ms-flex-align: stretch /* for vertical aligning text in header */;
+              -ms-grid-row-align: stretch /* for vertical aligning text in header */;
+          align-items: stretch /* for vertical aligning text in header */;
+}
+.react-datagrid .z-summary .z-cell {
+  position: relative;
+  border-bottom: 1px solid #a8a8a8;
+}
+.react-datagrid .z-summary .z-cell .z-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-flow: row;
+  -o-flex-flow: row;
+  flex-flow: row;
+  flex-flow: row;
+  box-orient: horizontal;
+  height: 100%;
+}
+.react-datagrid .z-summary .z-cell .z-content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.react-datagrid .z-summary .z-cell.z-last {
+  border-right: 1px solid #a8a8a8;
+}
+.react-datagrid .z-summary .z-cell:not(.z-first) {
+  border-left: 1px solid #a8a8a8;
+}

@@ -1,5 +1,4 @@
 {
-
   "name": "electron-react-boilerplate",
   "productName": "ElectronReact",
   "version": "0.10.0",
@@ -22,7 +21,6 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./app/main.development",
     "postinstall": "concurrently \"install-app-deps\" \"node node_modules/fbjs-scripts/node/check-dev-engines.js package.json\"",
     "dev": "npm run hot-server -- --start-hot",
-
     "package": "npm run build && build --publish never",
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
@@ -166,16 +164,25 @@
     "bootstrap": "^3.3.7",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
+    "lodash-joins": "^2.0.2",
+    "moment": "^2.17.1",
+    "mssql": "^3.3.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
+    "react-bootstrap-table": "^2.11.0",
+    "react-datagrid": "^2.1.2",
     "react-dom": "^15.4.2",
+    "react-progress-button": "^5.0.1",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-bootstrap": "^0.23.1",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "source-map-support": "^0.4.10"
+    "sorty": "^1.2.2",
+    "source-map-support": "^0.4.10",
+    "tedious": "^1.14.0"
   },
   "devEngines": {
     "node": ">=6.x",

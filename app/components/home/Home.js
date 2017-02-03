@@ -48,8 +48,8 @@ export default class Home extends Component {
         <table className="tg">
         <tbody>
           <tr>
-              <td className="btnPrimary" onClick={()=>{this.props.counter();}}>PO Request Transfer</td>
-              <td className="btnSuccess"onClick={()=>{this.props.counter();}}>Generate Receivers</td>
+              <td className="btnPrimary" onClick={()=>{this.props.port();}}>PO Request Transfer</td>
+              <td className="btnSuccess"onClick={()=>{this.props.gr();}}>Generate Receivers</td>
               <td className="btnWarning" onClick={()=>{this.props.counter();}}>Reports</td>
           </tr>
           </tbody>
@@ -70,10 +70,10 @@ export default class Home extends Component {
     </NavbarHeader>
     <NavbarCollapse>
       <Nav>
-        <LinkContainer to="/counter">
+        <LinkContainer to="/POReqTrans">
           <NavItem eventKey={2}>PO Request Transfer</NavItem>
         </LinkContainer>      
-        <LinkContainer to="/counter">
+        <LinkContainer to="/GenReceivers">
           <NavItem eventKey={1}>Generate Receivers</NavItem>
         </LinkContainer>      
         <LinkContainer to="/counter">

@@ -73,8 +73,10 @@ export default validate(merge(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('development')
     }),
+//       'process.env.NODE_ENV': JSON.stringify('production')
+
 
     /**
      * Babli is an ES6+ aware minifier based on the Babel toolchain (beta)
