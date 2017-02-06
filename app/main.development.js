@@ -3,13 +3,14 @@ import { app, BrowserWindow, Menu, shell } from 'electron';
 let menu;
 let template;
 let mainWindow = null;
+const debug=false;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
   sourceMapSupport.install();
 }
 
-if (process.env.NODE_ENV === 'development') {
+if ((true==debug)||(process.env.NODE_ENV === 'development')) {
   require('electron-debug')(); // eslint-disable-line global-require
   const path = require('path'); // eslint-disable-line
   const p = path.join(__dirname, '..', 'app', 'node_modules'); // eslint-disable-line
@@ -22,7 +23,8 @@ app.on('window-all-closed', () => {
 
 
 const installExtensions = async () => {
-  if (process.env.NODE_ENV === 'development') {
+  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
+  //if (process.env.NODE_ENV === 'development') {
     const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
 
     const extensions = [
@@ -61,7 +63,8 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  if (process.env.NODE_ENV === 'development') {
+  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
+//  if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
     mainWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;
