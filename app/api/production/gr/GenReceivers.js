@@ -5,14 +5,14 @@ import { remote,ipcRenderer } from 'electron';
 
 
 
-import * as CHK from "../../../actions/common/ChkConst.js"
+import * as CHK from "../../../const/ChkConst.js"
 import * as CONNECT from "../../../const/SQLConst.js"
 import * as GRACTION from "../../../actions/production/gr/GRConst.js"
 import * as GRLIMITS from "../../../actions/production/gr/GRLimits.js"
 import * as GRSTATE from "../../../actions/production/gr/GRState.js"
 import * as GRSTEPS from "../../../actions/production/gr/GRSteps.js"
 import * as MISC from "../../../const/Misc.js"
-import * as PROGRESSBUTTON from "../../../actions/common/ProgressButtonConst.js"
+import * as PROGRESSBUTTON from "../../../const/ProgressButtonConst.js"
 import * as SQLPOSTATUSUPDATE from "./SQLPOStatusUpdate.js"
 import * as SQLEXEC from "./SQLExec.js"
 import * as SQLFINISH from "./SQLFinish.js"

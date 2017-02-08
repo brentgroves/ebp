@@ -1,6 +1,6 @@
-import * as ACTION from "../actions/Rpt/Const.js"
-import * as STATE from "../actions/Rpt/State.js"
-import * as PROGRESSBUTTON from "../actions/ProgressButtonConst.js"
+import * as ACTION from "../../../actions/rpt/production/Const.js"
+import * as STATE from "../../../actions/rpt/production/State.js"
+import * as PROGRESSBUTTON from "../../../actions/common/ProgressButtonConst.js"
 import update from 'react-addons-update';
 
 
@@ -60,21 +60,21 @@ export default function reducer( state = {}, action) {
       }
       var newData = update(state, 
         { 
-          closedPO:{$set:{
+          poWithReceivers:{$set:{
             dateHeader:{text:'Date Range',valid:true},
             dateStart:null,
             dateEnd:null,
             done:false,
             failed:false
           }},
-          noReceivers:{$set:{
+          poNoReceivers:{$set:{
             dateHeader:{text:'Date Range',valid:true},
             dateStart:null,
             dateEnd:null,
             done:false,
             failed:false
           }},
-          openPO:{$set:{
+          openPOEmail:{$set:{
               curPage:1,
               dateStart:null,
               dateEnd:null,
@@ -86,21 +86,24 @@ export default function reducer( state = {}, action) {
               poItem:[],
               po:[],
               select:[],
-              selectDelim:[]
+              selectDelim:[],
+              sqlOpenPOEmail:{$set:{done:false,failed:false}},
+              openPOEmailPager:{$set:{done:false,failed:false}},
             }},
-          openPOPager:{$set:{done:false,failed:false}},
           progressBtn:{$set:PROGRESSBUTTON.READY},
-          poStatusReport:{$set:{pdf:'',done:false,failed:false}},
+ //         poStatusReport:{$set:{pdf:'',done:false,failed:false}},
           reason:{$set:''},
-          status:{$set: ''},
-          sqlOpenPO:{$set:{done:false,failed:false}},
-          sqlOpenPOVendorEmail:{$set:{done:false,failed:false}}
+          status:{$set: ''}
         });
       return newData;
     }
 
+    /////////////////////////////////////////////////////////////////
+    // Open PO Email Start
+    /////////////////////////////////////////////////////////////////
 
-    case ACTION.OPENPO_EMAIL_MRO_TOGGLE:
+
+    case ACTION.OPENPOEMAIL_MRO_TOGGLE:
     {
       var openPO = state.openPO;
       if ('development'==process.env.NODE_ENV) {
@@ -144,6 +147,11 @@ export default function reducer( state = {}, action) {
       var newData = update(state, {openPOPager: {$set: openPOPager}});
       return newData;
     }
+    /////////////////////////////////////////////////////////////////
+    // Open PO Email End
+    /////////////////////////////////////////////////////////////////
+
+
     case ACTION.SET_CLOSEDPO_REPORT_FAILED:
     {
       var closedPO = state.closedPO;

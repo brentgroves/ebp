@@ -3,16 +3,14 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Link,IndexLink } from 'react-router';
 import {LinkContainer} from 'react-router-bootstrap';
-import ProgressBtn from '../../../containers/rpt/ProgressBtn';
 import * as STATE from "../../../actions/rpt/production/State.js"
 import { Grid, Row, Col, Navbar, Nav, NavItem, NavDropdown, MenuItem, Jumbotron,Button} from 'react-bootstrap';
 import {Header as NavbarHeader, Brand as NavbarBrand, Toggle as NavbarToggle, Collapse as NavbarCollapse, Text as NavbarText } from 'react-bootstrap/lib/Navbar'
-///////////////// OPenPO NO RECEIVERS
-import NoReceiversDateRange from "../../../containers/rpt/production/OpenPONoReceivers/NoReceiversDateRange";
-///////////////////////////// CLOSEDPD
-import ClosedPODateRange from "../../../containers/rpt/production/ClosedPO/ClosedPODateRange";
-////////// OPENPO EMail
-import POPrompt from "../../../containers/rpt/production/POPrompt";
+
+import ProgressBtn from '../../../containers/rpt/common/ProgressBtn';
+import NoReceiversDateRange from "../../../containers/rpt/production/PONoReceivers/PONoReceiversDateRange";
+import ClosedPODateRange from "../../../containers/rpt/production/POWithReceivers/POWithReceiversDateRange";
+import POPrompt from "../../../containers/rpt/production/OpenPOEmail/POPrompt";
 import DateTimeRange from "../../../containers/rpt/production/OpenPOEmail/DateTimeRange";
 var Moment = require('moment');
 
@@ -384,7 +382,7 @@ export default class Reports extends Component {
             <table className={styles.tg}>
             <tbody>
               <tr>
-                <td className={styles.btnPrimary} onClick={()=>{this.props.NoReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with No Receivers</span><br/>PDF format</td>
+                <td className={styles.btnPrimary} onClick={()=>{this.props.PONoReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with No Receivers</span><br/>PDF format</td>
                 <td className={styles.btnSuccess} 
                 onClick={()=>{this.props.OpenPOEMail();}}>
                 <span style={rpt1Style}>Open PO</span><br/>MRO/Vendor Email</td>
@@ -436,20 +434,22 @@ export default class Reports extends Component {
     </div>
   }
 
-/* Open PO NO RECEIVERS */
+/////////////////////////////////////////////////////////////////
+// PO No Receivers Start
+/////////////////////////////////////////////////////////////////
   if(
-      (STATE.NORECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state) ||
-      (STATE.NORECEIVERS_DATE_RANGE_READY==this.props.Rpt.state)
+      (STATE.PONORECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state) ||
+      (STATE.PONORECEIVERS_DATE_RANGE_READY==this.props.Rpt.state)
     )
   {
-    noReceiversDateRange = 
+    poNoReceiversDateRange = 
     <div>
       <Row>
         <Col xs={1}>&nbsp;</Col>
       </Row>
       <Row>
         <Col xs={1} >&nbsp;</Col>
-        <Col xs={10}><NoReceiversDateRange/></Col>
+        <Col xs={10}><PONoReceiversDateRange/></Col>
         <Col xs={1}>&nbsp;</Col>
       </Row>
 
@@ -457,7 +457,7 @@ export default class Reports extends Component {
   }
 
   if( 
-    (STATE.NORECEIVERS_DATE_RANGE_NO_RECORDS==this.props.Rpt.state) 
+    (STATE.PONORECEIVERS_DATE_RANGE_NO_RECORDS==this.props.Rpt.state) 
     )
   {
     backBtn = 
@@ -465,14 +465,19 @@ export default class Reports extends Component {
       <Row>
         <Col xs={5} >&nbsp;</Col>
         <Col xs={2}><Button  onClick={()=> {
-                              this.props.setState(STATE.NORECEIVERS_DATE_RANGE_READY);
+                              this.props.setState(STATE.PONORECEIVERS_DATE_RANGE_READY);
                             }} bsSize="large" bsStyle="warning">Back</Button></Col>
         <Col xs={5}>&nbsp;</Col>
       </Row>
     </div>
   }
+/////////////////////////////////////////////////////////////////
+// PO No Receivers End
+/////////////////////////////////////////////////////////////////
 
-/* OPENPO */
+/////////////////////////////////////////////////////////////////
+// Open PO Email Start
+/////////////////////////////////////////////////////////////////
   if(
       (STATE.PO_PROMPT_NOT_READY==this.props.Rpt.state) ||
       (STATE.PO_PROMPT_READY==this.props.Rpt.state)
@@ -494,18 +499,18 @@ export default class Reports extends Component {
 
 
   if(
-      (STATE.OPENPO_DATE_RANGE_NOT_READY==this.props.Rpt.state) ||
-      (STATE.OPENPO_DATE_RANGE_READY==this.props.Rpt.state)
+      (STATE.OPENPOEMAIL_DATE_RANGE_NOT_READY==this.props.Rpt.state) ||
+      (STATE.OPENPOEMAIL_DATE_RANGE_READY==this.props.Rpt.state)
     )
   {
-    openPODateRange = 
+    openPOEmailDateRange = 
     <div>
       <Row>
         <Col xs={1}>&nbsp;</Col>
       </Row>
       <Row>
         <Col xs={1} >&nbsp;</Col>
-        <Col xs={10}><DateTimeRange/></Col>
+        <Col xs={10}><OpenPOEmailDateTimeRange/></Col>
         <Col xs={1}>&nbsp;</Col>
       </Row>
 

@@ -90,7 +90,7 @@ Object.assign(Validation.rules, {
 });
 
 
-export default class DateTimeRange extends React.Component {
+export default class ODateTimeRange extends React.Component {
   static propTypes = {
     Rpt: PropTypes.object.isRequired
   };

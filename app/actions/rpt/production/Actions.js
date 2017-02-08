@@ -2,13 +2,16 @@ import * as ACTION from "./Const.js"
 import * as State from "./State.js"
 import { push } from 'react-router-redux';
 import * as OPENPOEMAIL from '../../../api/rpt/production/OpenPOEmail/OpenPOEmail';
-import * as NORECV from '../../../api/rpt/production/OpenPONoReceivers/OpenPONoReceivers';
+import * as PONORECEIVERS from '../../../api/rpt/production/PONoReceivers/PONoReceivers';
+import * as POWITHRECEIVERS from '../../../api/rpt/production/POWithReceivers/POWithNoReceivers';
 import * as MISC from "../../../const/Misc.js"
 var _ = require('lodash');
 var joins = require('lodash-joins');
 
-//Supervisor-PLT-7
 
+/////////////////////////////////////////////////////////////////
+// Common Start
+/////////////////////////////////////////////////////////////////
 export function cancelApp() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.CancelApp()->top.`);
@@ -20,15 +23,17 @@ export function cancelApp() {
   };
 }
 
+export function setState(state) {
+  return {
+    type: ACTION.SET_STATE,
+    state: state
+  };
+}
 
-export function reports() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.reports()->top.`);
-  }
-
- return (dispatch,getState) => {
-      dispatch({ type:ACTION.INIT });
-      dispatch(push('/Reports'));
+export function setStatus(status) {
+  return {
+    type: ACTION.SET_STATUS,
+    status: status
   };
 }
 
@@ -45,8 +50,31 @@ export function initNoState() {
   };
 }
 
+export function prodReports() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.prodReports()->top.`);
+  }
+
+ return (dispatch,getState) => {
+      dispatch({ type:ACTION.INIT });
+      dispatch(push('/ProdReports'));
+  };
+}
+
+export function setProgressBtn(goButton) {
+  return {
+    type: ACTION.SET_PROGRESS_BTN,
+    progressBtn: progressBtn
+  };
+}
+/////////////////////////////////////////////////////////////////
+// Common End
+/////////////////////////////////////////////////////////////////
 
 
+/////////////////////////////////////////////////////////////////
+// Open PO Email Start
+/////////////////////////////////////////////////////////////////
 export function OpenPOEmail() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.OpenPOEMail()->top.`);
@@ -58,335 +86,284 @@ export function OpenPOEmail() {
     OPENPOEMAIL.OpenPOEMail(disp,getSt);
   };
 }
-////////////////////////////////////////////////
 export function OpenPOEmailMROToggle() {
   return {
-    type: ACTION.OPENPO_EMAIL_MRO_TOGGLE
+    type: ACTION.OPENPOEMAIL_MRO_TOGGLE
   };
 }
 
 export function OpenPOEmailVendorToggle() {
   return {
-    type: ACTION.OPENPO_EMAIL_VENDOR_TOGGLE
+    type: ACTION.OPENPOEMAIL_VENDOR_TOGGLE
   };
 }
 
-export function OpenPOPager() {
+export function OpenPOEmailPager() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOPager()->top.`);
+    console.log(`ACTIONS.OpenPOEmailPager()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.OpenPOPager(disp,getSt);
+    OPENPOEMAIL.OpenPOEmailPager(disp,getSt);
   };
 }
 
-export function OpenPOVendorEmail() {
+
+export function OpenPOEmailDateRange() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOVendorEmail()->top.`);
+    console.log(`ACTIONS.OpenPOEmailDateRange()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.OpenPOVendorEmail(disp,getSt);
+    OPENPOEMAIL.OpenPOEmailDateRange(disp,getSt);
   };
 }
 
-export function OpenPOVendorDateRange() {
+export function OpenPOEmailReport() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOVendorDateRange()->top.`);
+    console.log(`ACTIONS.OpenPOEmailReport()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.OpenPOVendorDateRange(disp,getSt);
+    OPENPOEMAIL.OpenPOEmailReport(disp,getSt);
   };
 }
 
-export function OpenPOVendorEmailReport() {
+export function setOpenPOEmailPO(po) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOVendorEmailReport()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    API.OpenPOVendorEmailReport(disp,getSt);
-  };
-}
-
-export function setOpenPO(po) {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setOpenPO()->top. ${po}`);
+    console.log(`ACTIONS.setOpenPOEmailPO()->top. ${po}`);
   }
   return {
-    type: ACTION.SET_OPENPO,
+    type: ACTION.SET_OPENPOEMAIL_PO,
     po: po
   };
 }
 
-export function setOpenPOSelect(select) {
+export function setOpenPOEmailSelect(select) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setOpenPOSelect()->top. ${select}`);
+    console.log(`ACTIONS.setOpenPOEmailSelect()->top. ${select}`);
   }
   return {
-    type: ACTION.SET_OPENPO_SELECT,
+    type: ACTION.SET_OPENPOEMAIL_SELECT,
     select: select
   };
 }
 
-
-
-export function setOpenPODateStart(dateStart) {
+export function setOpenPOEmailDateStart(dateStart) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setOpenPODateStart()->top. ${dateStart}`);
+    console.log(`ACTIONS.setOpenPOEmailDateStart()->top. ${dateStart}`);
 
   }
 
   return {
-    type: ACTION.SET_OPENPO_DATE_START,
+    type: ACTION.SET_OPENPOEMAIL_DATE_START,
     dateStart: dateStart
   };
 }
 
-export function setOpenPODateEnd(dateEnd) {
+export function setOpenPOEmailDateEnd(dateEnd) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setOpenPODateEnd()->top. ${dateEnd}`);
+    console.log(`ACTIONS.setOpenPOEmailDateEnd()->top. ${dateEnd}`);
 
   }
 
   return {
-    type: ACTION.SET_OPENPO_DATE_END,
+    type: ACTION.SET_OPENPOEMAIL_DATE_END,
     dateEnd: dateEnd
   };
 }
 
-export function setOpenPOCurPage(curPage) {
+export function setOpenPOEmailCurPage(curPage) {
   return {
-    type: ACTION.SET_OPENPO_CURPAGE,
+    type: ACTION.SET_OPENPOEMAIL_CURPAGE,
     curPage: curPage
   };
 }
-export function setOpenPOPrevPage() {
+export function setOpenPOEmailPrevPage() {
   return {
-    type: ACTION.SET_OPENPO_PREVPAGE
+    type: ACTION.SET_OPENPOEMAIL_PREVPAGE
   };
 }
-export function setOpenPONextPage() {
+export function setOpenPOEmailNextPage() {
   return {
-    type: ACTION.SET_OPENPO_NEXTPAGE
+    type: ACTION.SET_OPENPOEmail_NEXTPAGE
   };
 }
 
-
-export function toggleOpenPOSelected(poNumber) {
+export function toggleOpenPOEmailSelected(poNumber) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.toggleOpenPOSelected()->top.`);
+    console.log(`ACTIONS.toggleOpenPOEmailSelected()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.ToggleOpenPOSelected(disp,getSt,poNumber);
+    OPENPOEMAIL.ToggleOpenPOEmailSelected(disp,getSt,poNumber);
   };
 }
 
-export function toggleOpenPOVisible(poNumber) {
+export function toggleOpenPOEmailVisible(poNumber) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.toggleOpenPOVisible()->top.`);
+    console.log(`ACTIONS.toggleOpenPOEmailVisible()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.ToggleOpenPOVisible(disp,getSt,poNumber);
+    OPENPOEMAIL.ToggleOpenPOEmailVisible(disp,getSt,poNumber);
   };
 }
+/////////////////////////////////////////////////////////////////
+// Open PO Email End
+/////////////////////////////////////////////////////////////////
 
 
 
 
-/////////////////////////////////////////////
-export function POStatusReport() {
+/////////////////////////////////////////////////////////////////
+// PO With Receivers Start
+/////////////////////////////////////////////////////////////////
+
+export function POWithReceivers() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.POStatusReport()->top.`);
+    console.log(`ACTIONS.POWithReceivers()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.POStatusReport(disp,getSt);
+    POWITHRECEIVERS.POWithReceivers(disp,getSt);
   };
 }
 
-export function POVendorEmail() {
+export function POWithReceiversPrompt() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.POVendorEmail()->top.`);
+    console.log(`ACTIONS.POWithReceiversrompt()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.POVendorEmail(disp,getSt);
+    POWITHRECEIVERS.POWithReceiversPrompt(disp,getSt);
   };
 }
-////////////////CLOSEDPO
-export function ClosedPO() {
+
+export function POWithReceiversDateRange() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.ClosedPO()->top.`);
+    console.log(`ACTIONS.POWithReceiversDateRange()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    API.ClosedPO(disp,getSt);
-  };
-}
-
-export function ClosedPOPrompt() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.ClosedPOPrompt()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    API.ClosedPOPrompt(disp,getSt);
-  };
-}
-
-export function ClosedPODateRange() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.ClosedPODateRange()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    API.ClosedPODateRange(disp,getSt);
+    POWITHRECEIVERS.POWithReceiversDateRange(disp,getSt);
   };
 }
 
 
-export function setClosedPODateStart(dateStart) {
+export function setPOWithReceiversDateStart(dateStart) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setClosedPODateStart()->top. ${dateStart}`);
+    console.log(`ACTIONS.setPOWithReceiversDateStart()->top. ${dateStart}`);
 
   }
 
   return {
-    type: ACTION.SET_CLOSEDPO_DATE_START,
+    type: ACTION.SET_POWITHRECEIVERS_DATE_START,
     dateStart: dateStart
   };
 }
 
-export function setClosedPODateEnd(dateEnd) {
+export function setPOWithReceiversDateEnd(dateEnd) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setClosedPODateEnd()->top. ${dateEnd}`);
+    console.log(`ACTIONS.setPOWithReceiversDateEnd()->top. ${dateEnd}`);
 
   }
 
   return {
-    type: ACTION.SET_CLOSEDPO_DATE_END,
-    dateEnd: dateEnd
-  };
-}
-//////////////////OPEN PO NO RECEIVERS
-
-export function OpenPONoReceivers() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.NoReceivers()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    NORECV.NoReceivers(disp,getSt);
-  };
-}
-
-export function NoReceiversPrompt() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.NoReceiversPrompt()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    NORECV.NoReceiversPrompt(disp,getSt);
-  };
-}
-
-export function NoReceiversDateRange() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.NoReceiversDateRange()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    NORECV.NoReceiversDateRange(disp,getSt);
-  };
-}
-
-
-export function setNoReceiversDateStart(dateStart) {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setNoReceiversDateStart()->top. ${dateStart}`);
-
-  }
-
-  return {
-    type: ACTION.SET_NORECEIVERS_DATE_START,
-    dateStart: dateStart
-  };
-}
-
-export function setNoReceiversDateEnd(dateEnd) {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.setNoReceiversDateEnd()->top. ${dateEnd}`);
-
-  }
-
-  return {
-    type: ACTION.SET_NORECEIVERS_DATE_END,
+    type: ACTION.SET_POWITHRECEIVERS_DATE_END,
     dateEnd: dateEnd
   };
 }
 /////////////////////////////////////////////////////////////////
-export function setProductCategoryStyle(category,style) {
-  return {
-    type: ACTION.SET_PRODUCTS_CATEGORY_STYLE,
-    category: category,
-    style:style
+// PO With Receivers End
+/////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////
+// PO No Receivers Start
+/////////////////////////////////////////////////////////////////
+export function PONoReceivers() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.PONoReceivers()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    PONORECEIVERS.PONoReceivers(disp,getSt);
   };
 }
 
-export function setProgressBtn(goButton) {
-  return {
-    type: ACTION.SET_PROGRESS_BTN,
-    progressBtn: progressBtn
+
+export function PONoReceiversPrompt() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.PONoReceiversPrompt()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    PONORECEIVERS.PONoReceiversPrompt(disp,getSt);
+  };
+}
+
+export function PONoReceiversDateRange() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.PONoReceiversDateRange()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    PONORECEIVERS.PONoReceiversDateRange(disp,getSt);
   };
 }
 
 
+export function setPONoReceiversDateStart(dateStart) {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.setPONoReceiversDateStart()->top. ${dateStart}`);
 
-export function setState(state) {
+  }
+
   return {
-    type: ACTION.SET_STATE,
-    state: state
+    type: ACTION.SET_PONORECEIVERS_DATE_START,
+    dateStart: dateStart
   };
 }
 
-export function setStatus(status) {
+export function setPONoReceiversDateEnd(dateEnd) {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.setPONoReceiversDateEnd()->top. ${dateEnd}`);
+
+  }
+
   return {
-    type: ACTION.SET_STATUS,
-    status: status
+    type: ACTION.SET_PONORECEIVERS_DATE_END,
+    dateEnd: dateEnd
   };
 }
+/////////////////////////////////////////////////////////////////
+// PO No Receivers End
+/////////////////////////////////////////////////////////////////
+
+
+
 
 

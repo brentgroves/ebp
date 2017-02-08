@@ -18,3 +18,9 @@ export function gr() {
       dispatch(push('/GenReceivers'));
   };
 }
+
+export function reports() {
+ return (dispatch,getState) => {
+      dispatch(push('/Reports'));
+  };
+}

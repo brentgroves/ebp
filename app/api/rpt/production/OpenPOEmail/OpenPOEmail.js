@@ -6,7 +6,7 @@ import * as CONNECT from "../../../../const/SQLConst.js"
 import * as ACTION from "../../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../../actions/rpt/production/State.js"
 import * as MISC from "../../../../const/Misc.js"
-import * as PROGRESSBUTTON from "../../../../actions/common/ProgressButtonConst.js"
+import * as PROGRESSBUTTON from "../../../../const/ProgressButtonConst.js"
 import * as SQLPRIMEDB from "../../../../const/SQLPrimeDB.js"
 import * as SQLOPENPO from "./SQLOpenPO.js"
 import * as SQLOPENPOVENDOREMAIL from "./SQLOpenPOVendorEmail.js"
@@ -209,7 +209,7 @@ export async function OpenPOEmail(disp,getSt) {
     });
     cnt=0;
     maxCnt=10;
-    while(!getState().Reports.sqlOpenPO.done){
+    while(!getState().ProdReports.sqlOpenPO.done){
       if(++cnt>maxCnt ){
         break;
       }else{
@@ -217,8 +217,8 @@ export async function OpenPOEmail(disp,getSt) {
       }
     }
 
-    if(getState().Reports.sqlOpenPO.failed || 
-      !getState().Reports.sqlOpenPO.done){
+    if(getState().ProdReports.sqlOpenPO.failed || 
+      !getState().ProdReports.sqlOpenPO.done){
       if ('development'==process.env.NODE_ENV) {
         console.log(`SQLOPENPO.sql1() FAILED.`);
       }
@@ -226,20 +226,20 @@ export async function OpenPOEmail(disp,getSt) {
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
       dispatch({ type:ACTION.SET_STATUS, status:'Can not run bpOpenPO sproc on Cribmaster...' });
       continueProcess=false;
-    }else if(0<getState().Reports.openPO.po.length){
+    }else if(0<getState().ProdReports.openPO.po.length){
       if ('development'==process.env.NODE_ENV) {
         console.log(`SQLOPENPO.sql1() Success.`);
       }
     }else{
-      dispatch({ type:ACTION.SET_STATE, state:STATE.OPENPO_NO_RECORDS });
+      dispatch({ type:ACTION.SET_STATE, state:STATE.OPENPOEMAIL_NO_RECORDS });
       continueProcess=false;
     }
   }
 
   if(continueProcess){
-    dispatch({type:ACTION.SET_OPENPO_DATE_START,dateStart:Moment().startOf('day').toDate()});
-    dispatch({type:ACTION.SET_OPENPO_DATE_END,dateEnd:Moment().startOf('day').toDate()});
-    dispatch({type:ACTION.SET_STATE, state:STATE.OPENPO_DATE_RANGE_NOT_READY});
+    dispatch({type:ACTION.SET_OPENPOEMAIL_DATE_START,dateStart:Moment().startOf('day').toDate()});
+    dispatch({type:ACTION.SET_OPENPOEMAIL_DATE_END,dateEnd:Moment().startOf('day').toDate()});
+    dispatch({type:ACTION.SET_STATE, state:STATE.OPENPOEMAIL_DATE_RANGE_NOT_READY});
   }
 }
 

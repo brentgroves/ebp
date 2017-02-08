@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import 'react-widgets/lib/less/react-widgets.less';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import Multiselect from 'react-widgets/lib/Multiselect';
-import '../../../../css/Rpt/styles.global.css';
 import { FormGroup,FormControl,HelpBlock,Checkbox,ControlLabel,Label,Row,Col,ListGroup,ListGroupItem,Panel,Table,Button,Glyphicon,ButtonGroup,ButtonToolbar} from 'react-bootstrap';
 import { ButtonInput } from 'react-bootstrap';
 var dateFormat = require('dateformat');
@@ -11,13 +10,14 @@ var momentLocalizer = require('react-widgets/lib/localizers/moment');
 var classNames = require('classnames');
 import * as STATE from "../../../../actions/rpt/production/State.js"
 import styles from '../../../../css/rpt/styles.css';
+//import '../../../../css/Rpt/styles.global.css';
 
 momentLocalizer(Moment);
 
 
-export default class NoReceiversDateRange extends React.Component {
+export default class PONoReceiversDateRange extends React.Component {
   static propTypes = {
-    Rpt: PropTypes.object.isRequired
+    ProdRpt: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -58,12 +58,12 @@ export default class NoReceiversDateRange extends React.Component {
 
     var runAndBackBtn;
     if(
-           (STATE.NORECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state) 
+           (STATE.PONORECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state) 
       ){
      runAndBackBtn = 
       <Row>
         <Col xs={4} >&nbsp;</Col>
-        <Col xs={1}><Button  onClick={()=>this.props.OpenPONoReceivers()} bsSize="large" bsStyle="info" disabled>Run</Button></Col>
+        <Col xs={1}><Button  onClick={()=>this.props.PONoReceivers()} bsSize="large" bsStyle="info" disabled>Run</Button></Col>
         <Col xs={1} >&nbsp;</Col>
         <Col xs={2}><Button onClick={()=>this.props.setState(STATE.NOT_STARTED)} bsSize="large" bsStyle="warning">Back</Button></Col>
         <Col xs={3}>&nbsp;</Col>
@@ -73,7 +73,7 @@ export default class NoReceiversDateRange extends React.Component {
       <Row>
         <Col xs={4} >&nbsp;</Col>
 
-        <Col xs={2}><Button  onClick={()=>this.props.OpenPONoReceivers()}  bsSize="large" bsStyle="info" >Run</Button></Col>
+        <Col xs={2}><Button  onClick={()=>this.props.PONoReceivers()}  bsSize="large" bsStyle="info" >Run</Button></Col>
         <Col xs={1}><Button  onClick={()=>this.props.setState(STATE.NOT_STARTED)} bsSize="large" bsStyle="warning">Back</Button></Col>
         <Col xs={3}>&nbsp;</Col>
       </Row>
@@ -85,10 +85,10 @@ export default class NoReceiversDateRange extends React.Component {
     var dateHeader; 
     var dateStyle;
     if(this.props.Rpt.noReceivers.dateHeader.valid){
-      dateHeader=<h3 style={{textAlign:'center'}}>{this.props.Rpt.noReceivers.dateHeader.text}</h3>
+      dateHeader=<h3 style={{textAlign:'center'}}>{this.props.ProdRpt.poNoReceivers.dateHeader.text}</h3>
       dateStyle='default';
     }else{
-      dateHeader=<h3 style={{textAlign:'center',color:'red !important'}}>{this.props.Rpt.noReceivers.dateHeader.text}</h3>
+      dateHeader=<h3 style={{textAlign:'center',color:'red !important'}}>{this.props.ProdRpt.poNoReceivers.dateHeader.text}</h3>
       dateStyle='danger';
     }
 
@@ -102,11 +102,11 @@ export default class NoReceiversDateRange extends React.Component {
             <Col xs={8} xsOffset={1} style={{}}>
               <DateTimePicker 
                 onChange={(name,value)=>{
-                  this.state.test(name,this.props.Rpt.noReceivers.dateStart,this.props.Rpt.noReceivers.dateEnd);
-                  this.props.setNoReceiversDateStart(name);
-                  this.props.NoReceiversDateRange();
+                  this.state.test(name,this.props.ProdRpt.poNoReceivers.dateStart,this.props.ProdRpt.poNoReceivers.dateEnd);
+                  this.props.setPONoReceiversDateStart(name);
+                  this.props.PONoReceiversDateRange();
                 }}
-              defaultValue={this.props.Rpt.noReceivers.dateStart} />
+              defaultValue={this.props.ProdRpt.poNoReceivers.dateStart} />
             </Col>
           </Row>
           <Row>
@@ -116,10 +116,10 @@ export default class NoReceiversDateRange extends React.Component {
             <Col xs={8} xsOffset={1}>
               <DateTimePicker 
                 onChange={(name,value)=>{
-                  this.props.setNoReceiversDateEnd(name);
-                  this.props.NoReceiversDateRange();
+                  this.props.setPONoReceiversDateEnd(name);
+                  this.props.PONoReceiversDateRange();
                 }}
-              defaultValue={this.props.Rpt.noReceivers.dateEnd} />
+              defaultValue={this.props.ProdRpt.poNoReceivers.dateEnd} />
             </Col>
           </Row>
         </Panel>
