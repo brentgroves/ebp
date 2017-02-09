@@ -26,15 +26,13 @@ export default class PONoReceiversDateRange extends React.Component {
       test:this.test.bind(this)
     };
     if ('development'==process.env.NODE_ENV) {
-//      console.log(`POPrompt:this.props.toggleOpenPOSelected=>`);
-//      console.dir(this.props.toggleOpenPOSelected);
     }
   }
  
  test(dt,dateStart,dateEnd){
   console.log(`dt: ${dt}`);
   //'08-12-2012 10:15:10'
-//  var dtStr =Moment(new Date(dt)).format("MM-DD-YYYY hh:mm:ss");
+  //  var dtStr =Moment(new Date(dt)).format("MM-DD-YYYY hh:mm:ss");
   //var dtStr = Date(dt);
   //dtStr.toLocalString();
 
@@ -57,13 +55,11 @@ export default class PONoReceiversDateRange extends React.Component {
   render() {
 
     var runAndBackBtn;
-    if(
-           (STATE.PONORECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state) 
-      ){
+    if(STATE.PONORECEIVERS_DATE_RANGE_NOT_READY==this.props.ProdRpt.state){
      runAndBackBtn = 
       <Row>
         <Col xs={4} >&nbsp;</Col>
-        <Col xs={1}><Button  onClick={()=>this.props.PONoReceivers()} bsSize="large" bsStyle="info" disabled>Run</Button></Col>
+        <Col xs={1}><Button  onClick={()=>this.props.poNoReceivers()} bsSize="large" bsStyle="info" disabled>Run</Button></Col>
         <Col xs={1} >&nbsp;</Col>
         <Col xs={2}><Button onClick={()=>this.props.setState(STATE.NOT_STARTED)} bsSize="large" bsStyle="warning">Back</Button></Col>
         <Col xs={3}>&nbsp;</Col>
@@ -73,7 +69,7 @@ export default class PONoReceiversDateRange extends React.Component {
       <Row>
         <Col xs={4} >&nbsp;</Col>
 
-        <Col xs={2}><Button  onClick={()=>this.props.PONoReceivers()}  bsSize="large" bsStyle="info" >Run</Button></Col>
+        <Col xs={2}><Button  onClick={()=>this.props.poNoReceivers()}  bsSize="large" bsStyle="info" >Run</Button></Col>
         <Col xs={1}><Button  onClick={()=>this.props.setState(STATE.NOT_STARTED)} bsSize="large" bsStyle="warning">Back</Button></Col>
         <Col xs={3}>&nbsp;</Col>
       </Row>
@@ -84,7 +80,7 @@ export default class PONoReceiversDateRange extends React.Component {
 
     var dateHeader; 
     var dateStyle;
-    if(this.props.Rpt.noReceivers.dateHeader.valid){
+    if(this.props.ProdRpt.poNoReceivers.dateHeader.valid){
       dateHeader=<h3 style={{textAlign:'center'}}>{this.props.ProdRpt.poNoReceivers.dateHeader.text}</h3>
       dateStyle='default';
     }else{
@@ -104,7 +100,7 @@ export default class PONoReceiversDateRange extends React.Component {
                 onChange={(name,value)=>{
                   this.state.test(name,this.props.ProdRpt.poNoReceivers.dateStart,this.props.ProdRpt.poNoReceivers.dateEnd);
                   this.props.setPONoReceiversDateStart(name);
-                  this.props.PONoReceiversDateRange();
+                  this.props.poNoReceiversDateRange();
                 }}
               defaultValue={this.props.ProdRpt.poNoReceivers.dateStart} />
             </Col>
@@ -117,7 +113,7 @@ export default class PONoReceiversDateRange extends React.Component {
               <DateTimePicker 
                 onChange={(name,value)=>{
                   this.props.setPONoReceiversDateEnd(name);
-                  this.props.PONoReceiversDateRange();
+                  this.props.poNoReceiversDateRange();
                 }}
               defaultValue={this.props.ProdRpt.poNoReceivers.dateEnd} />
             </Col>

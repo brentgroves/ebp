@@ -5,7 +5,7 @@ import * as Actions from '../../../../actions/rpt/production/Actions';
 
 function mapStateToProps(state) {
   return {
-    	ProdRpt: state.ProdReports
+    ProdRpt: state.ProdReports
   };
 }
 

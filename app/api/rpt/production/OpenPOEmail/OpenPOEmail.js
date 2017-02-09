@@ -159,7 +159,7 @@ export async function OpenPOVendorDateRange(disp,getSt) {
 }
 
 
-export async function OpenPOEmail(disp,getSt) {
+export async function openPOEmail(disp,getSt) {
   var dispatch = disp;
   var getState = getSt;
   var continueProcess=true;
@@ -209,7 +209,7 @@ export async function OpenPOEmail(disp,getSt) {
     });
     cnt=0;
     maxCnt=10;
-    while(!getState().ProdReports.sqlOpenPO.done){
+    while(!getState().ProdReports.openPOEmail.sqlOpenPO.done){
       if(++cnt>maxCnt ){
         break;
       }else{
@@ -217,18 +217,18 @@ export async function OpenPOEmail(disp,getSt) {
       }
     }
 
-    if(getState().ProdReports.sqlOpenPO.failed || 
-      !getState().ProdReports.sqlOpenPO.done){
+    if(getState().ProdReports.openPOEmail.sqlOpenPO.failed || 
+      !getState().ProdReports.openPOEmail.sqlOpenPO.done){
       if ('development'==process.env.NODE_ENV) {
-        console.log(`SQLOPENPO.sql1() FAILED.`);
+        console.log(`OPENPOEMAIL.SQLOPENPO.sql1() FAILED.`);
       }
       dispatch({ type:ACTION.SET_REASON, reason:`bpOpenPO FAILED. ` });
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
       dispatch({ type:ACTION.SET_STATUS, status:'Can not run bpOpenPO sproc on Cribmaster...' });
       continueProcess=false;
-    }else if(0<getState().ProdReports.openPO.po.length){
+    }else if(0<getState().ProdReports.openPOEmail.po.length){
       if ('development'==process.env.NODE_ENV) {
-        console.log(`SQLOPENPO.sql1() Success.`);
+        console.log(`OPENPOEMAIL.SQLOPENPO.sql1() Success.`);
       }
     }else{
       dispatch({ type:ACTION.SET_STATE, state:STATE.OPENPOEMAIL_NO_RECORDS });

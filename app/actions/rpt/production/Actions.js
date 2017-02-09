@@ -12,6 +12,7 @@ var joins = require('lodash-joins');
 /////////////////////////////////////////////////////////////////
 // Common Start
 /////////////////////////////////////////////////////////////////
+
 export function cancelApp() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.CancelApp()->top.`);
@@ -75,7 +76,7 @@ export function setProgressBtn(goButton) {
 /////////////////////////////////////////////////////////////////
 // Open PO Email Start
 /////////////////////////////////////////////////////////////////
-export function OpenPOEmail() {
+export function openPOEmail() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.OpenPOEMail()->top.`);
   }
@@ -83,43 +84,43 @@ export function OpenPOEmail() {
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.OpenPOEMail(disp,getSt);
+    OPENPOEMAIL.openPOEMail(disp,getSt);
   };
 }
-export function OpenPOEmailMROToggle() {
+export function openPOEmailMROToggle() {
   return {
     type: ACTION.OPENPOEMAIL_MRO_TOGGLE
   };
 }
 
-export function OpenPOEmailVendorToggle() {
+export function openPOEmailVendorToggle() {
   return {
     type: ACTION.OPENPOEMAIL_VENDOR_TOGGLE
   };
 }
 
-export function OpenPOEmailPager() {
+export function openPOEmailPager() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOEmailPager()->top.`);
+    console.log(`ACTIONS.openPOEmailPager()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.OpenPOEmailPager(disp,getSt);
+    OPENPOEMAIL.openPOEmailPager(disp,getSt);
   };
 }
 
 
-export function OpenPOEmailDateRange() {
+export function openPOEmailDateRange() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.OpenPOEmailDateRange()->top.`);
+    console.log(`ACTIONS.openPOEmailDateRange()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.OpenPOEmailDateRange(disp,getSt);
+    OPENPOEMAIL.openPOEmailDateRange(disp,getSt);
   };
 }
 
@@ -131,7 +132,7 @@ export function OpenPOEmailReport() {
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.OpenPOEmailReport(disp,getSt);
+    OPENPOEMAIL.openPOEmailReport(disp,getSt);
   };
 }
 
@@ -298,20 +299,7 @@ export function setPOWithReceiversDateEnd(dateEnd) {
 /////////////////////////////////////////////////////////////////
 // PO No Receivers Start
 /////////////////////////////////////////////////////////////////
-export function PONoReceivers() {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.PONoReceivers()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    PONORECEIVERS.PONoReceivers(disp,getSt);
-  };
-}
-
-
-export function PONoReceiversPrompt() {
+export function poNoReceiversPrompt() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.PONoReceiversPrompt()->top.`);
   }
@@ -319,19 +307,31 @@ export function PONoReceiversPrompt() {
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    PONORECEIVERS.PONoReceiversPrompt(disp,getSt);
+    PONORECEIVERS.poNoReceiversPrompt(disp,getSt);
   };
 }
 
-export function PONoReceiversDateRange() {
+export function poNoReceivers() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.PONoReceiversDateRange()->top.`);
+    console.log(`ACTIONS.poNoReceivers()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    PONORECEIVERS.PONoReceiversDateRange(disp,getSt);
+    PONORECEIVERS.poNoReceivers(disp,getSt);
+  };
+}
+
+export function poNoReceiversDateRange() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.poNoReceiversDateRange()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    PONORECEIVERS.poNoReceiversDateRange(disp,getSt);
   };
 }
 

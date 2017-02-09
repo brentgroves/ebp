@@ -5,9 +5,9 @@ import { remote,ipcRenderer } from 'electron';
 
 import * as ACTION from "../../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../../actions/rpt/production/State.js"
+
 import * as CONNECT from "../../../../const/SQLConst.js"
 import * as MISC from "../../../../const/Misc.js"
-
 import * as PROGRESSBUTTON from "../../../../const/ProgressButtonConst.js"
 import * as SQLPRIMEDB from "../../../../const/SQLPrimeDB.js"
 
@@ -20,7 +20,7 @@ var fs = require('fs');
 var client = require("jsreport-client")('http://localhost:5488', 'admin', 'password')
 
 
-export async function PONoReceiversPrompt(disp,getSt) {
+export async function poNoReceiversPrompt(disp,getSt) {
   var dispatch = disp;
   var getState = getSt;
   var continueProcess=true;
@@ -34,7 +34,7 @@ export async function PONoReceiversPrompt(disp,getSt) {
     dispatch({type:ACTION.SET_STATE, state:STATE.PONORECEIVERS_DATE_RANGE_READY});
   }
 }
-export async function PONoReceiversDateRange(disp,getSt) {
+export async function poNoReceiversDateRange(disp,getSt) {
   var dispatch = disp;
   var getState = getSt;
   var continueProcess=true;
@@ -66,7 +66,7 @@ export async function PONoReceiversDateRange(disp,getSt) {
 }
 
 
-export async function PONoReceivers(disp,getSt) {
+export async function poNoReceivers(disp,getSt) {
   var dispatch = disp;
   var getState = getSt;
   var continueProcess=true;
@@ -84,10 +84,9 @@ export async function PONoReceivers(disp,getSt) {
   if(continueProcess){
     var poNoReceivers=getState().ProdReports.poNoReceivers;
     if ('development'==process.env.NODE_ENV) {
-      console.log(`PONoReceiversDateRange().dateStart=>${poNoReceivers.dateStart}`);
-      console.log(`PONoReceiversDateRange().dateEnd=>${poNoReceivers.dateEnd}`);
+      console.log(`poNoReceivers().dateStart=>${poNoReceivers.dateStart}`);
+      console.log(`poNoReceivers().dateEnd=>${poNoReceivers.dateEnd}`);
     }
-
 
     var dateStart = poNoReceivers.dateStart; // DOES NOT WORK MUST NOT USE dateStart ?????? maybe 
     // because i typed noReceivers,dateStart instead of noReceivers.dateStart!!!
@@ -162,7 +161,7 @@ export async function PONoReceivers(disp,getSt) {
     if(getState().ProdReports.poNoReceivers.failed || 
       !getState().ProdReports.poNoReceivers.done){
       if ('development'==process.env.NODE_ENV) {
-        console.log(`PONoReceiversReport not successful.`);
+        console.log(`poNoReceivers() Report not successful.`);
       }
       dispatch({ type:ACTION.SET_REASON, reason:`Network or server problem preventing access to the Report Server. `});
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
@@ -170,7 +169,7 @@ export async function PONoReceivers(disp,getSt) {
       continueProcess=false;
     }else{
       if ('development'==process.env.NODE_ENV) {
-        console.log(`PONoReceiversReport Success.`);
+        console.log(`poNoReceiversReport Success.`);
       }
       dispatch({ type:ACTION.SET_STATE, state:STATE.SUCCESS});
     }

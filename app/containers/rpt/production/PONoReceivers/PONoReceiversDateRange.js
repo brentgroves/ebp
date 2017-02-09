@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PONoReceiversDateRange from '../../../../components/rpt/production/PONoReceivers/NoReceiversDateRange';
+import PONoReceiversDateRange from '../../../../components/rpt/production/PONoReceivers/PONoReceiversDateRange';
 import * as Actions from '../../../../actions/rpt/production/Actions';
 
 function mapStateToProps(state) {
