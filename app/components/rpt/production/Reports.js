@@ -152,7 +152,7 @@ export default class Reports extends Component {
           <Row>
             <Col xs={5} >&nbsp;</Col>
             <Col xs={2}><Button  onClick={()=> {
-                                  this.props.setState(STATE.OPENPO_DATE_RANGE_READY);
+                                  this.props.setState(STATE.OPENPOEMAIL_DATE_RANGE_READY);
                                 }} bsSize="large" bsStyle="warning">Back</Button></Col>
             <Col xs={5}>&nbsp;</Col>
           </Row>

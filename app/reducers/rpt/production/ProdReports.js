@@ -3,8 +3,41 @@ import * as STATE from "../../../actions/rpt/production/State.js"
 import * as PROGRESSBUTTON from "../../../actions/common/ProgressButtonConst.js"
 import update from 'react-addons-update';
 
+const initialState = { 
+  poWithReceivers:{
+    dateHeader:{text:'Date Range',valid:true},
+    dateStart:null,
+    dateEnd:null,
+    done:false,
+    failed:false
+  },
+  poNoReceivers:{
+    dateHeader:{text:'Date Range',valid:true},
+    dateStart:null,
+    dateEnd:null,
+    done:false,
+    failed:false
+  },
+  openPOEmail:{
+    curPage:1,
+    dateStart:null,
+    dateEnd:null,
+    dateHeader:{text:'Date Range',valid:true},
+    emailHeader:{text:'Email',valid:true},
+    emailMRO:false,
+    emailVendor:false,
+    maxPage:3,
+    poItem:[],
+    po:[],
+    select:[],
+    selectDelim:[],
+    pager:{done:false,failed:false},
+    sqlOpenPO:{done:false,failed:false},
+    sqlOpenPOVendorEmail:{done:false,failed:false}
+  }
+}
 
-export default function reducer( state = {}, action) {
+export default function reducer( state = initialState, action) {
   switch (action.type) {
     case ACTION.INIT:
     {
@@ -40,7 +73,7 @@ export default function reducer( state = {}, action) {
             po:[],
             select:[],
             selectDelim:[],
-            openPOPager:{$set:{done:false,failed:false}},
+            pager:{$set:{done:false,failed:false}},
             sqlOpenPO:{$set:{done:false,failed:false}},
             sqlOpenPOVendorEmail:{$set:{done:false,failed:false}}
           }},
@@ -86,6 +119,7 @@ export default function reducer( state = {}, action) {
               po:[],
               select:[],
               selectDelim:[],
+              pager:{$set:{done:false,failed:false}},
               sqlOpenPOEmail:{$set:{done:false,failed:false}},
               openPOEmailPager:{$set:{done:false,failed:false}}
           }},
@@ -374,7 +408,7 @@ export default function reducer( state = {}, action) {
       return newData;
     }
 
-    case ACTION.SQL_OPENPOEMAIL_VENDOR_EMAIL_FAILED:
+    case ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_FAILED:
     {
       var openPOEmail = state.openPOEmail;
       openPOEmail.sqlOpenPOVendorEmail.failed=action.failed;
@@ -382,7 +416,7 @@ export default function reducer( state = {}, action) {
       return newData;
     }
 
-    case ACTION.SQL_OPENPOEMAIL_VENDOR_EMAIL_DONE:
+    case ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_DONE:
     {
       var openPOEmail = state.openPOEmail;
       openPOEmail.sqlOpenPOVendorEmail.done=action.done;

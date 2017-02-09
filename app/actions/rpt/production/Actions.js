@@ -180,6 +180,20 @@ export function setOpenPOEmailDateEnd(dateEnd) {
   };
 }
 
+
+export function openPOVendorEmail(poNumber) {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.openPOVendorEmail()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    OPENPOEMAIL.openPOVendorEmail(disp,getSt,poNumber);
+  };
+}
+
+
 export function setOpenPOEmailCurPage(curPage) {
   return {
     type: ACTION.SET_OPENPOEMAIL_CURPAGE,

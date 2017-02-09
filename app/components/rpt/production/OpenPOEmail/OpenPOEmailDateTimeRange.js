@@ -56,7 +56,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
           </Label>
           <Button onClick={()=>{
             this.props.openPOEmailMROToggle();
-            this.props.openPOVendorDateRange();}} 
+            this.props.openPOEmailDateRange();}} 
             name="mro" bsStyle='primary' ><Glyphicon style={{  opacity: 1}} glyph="ok" />
           </Button>
         </span>;
@@ -68,14 +68,14 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
           </Label>
           <Button onClick={()=>{
             this.props.openPOEmailMROToggle();
-            this.props.openPOVendorDateRange();}} 
+            this.props.openPOEmailDateRange();}} 
             name="mro" bsStyle='primary' ><Glyphicon style={{  opacity: 0}} glyph="ok" />
           </Button>
         </span>;
     }
 
     var emailVendor;
-    if(this.props.Rpt.openPOEmail.emailVendor){
+    if(this.props.ProdRpt.openPOEmail.emailVendor){
       emailVendor=
         <span style={{borderStyle:'solid'}} >
           <Label   bsStyle='default' bsSize="large" htmlFor="vendor">
@@ -83,7 +83,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
           </Label>
             <Button onClick={()=>{
               this.props.openPOEmailVendorToggle();
-              this.props.openPOVendorDateRange();}} 
+              this.props.openPOEmailDateRange();}} 
               name="vendor" bsStyle='primary' ><Glyphicon style={{  opacity: 1}} glyph="ok" />
             </Button>
         </span>;
@@ -95,7 +95,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
           </Label>
           <Button onClick={()=>{
             this.props.openPOEmailVendorToggle();
-            this.props.openPOVendorDateRange();}} 
+            this.props.openPOEmailDateRange();}} 
             name="vendor" bsStyle='primary' ><Glyphicon style={{  opacity: 0}} glyph="ok" />
           </Button>
         </span>;
@@ -141,7 +141,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
                   value={this.props.ProdRpt.openPOEmail.select}
                   onChange={select => {
                     this.props.setOpenPOSelect(select);
-                    this.props.openPOVendorDateRange();
+                    this.props.openPOEmailDateRange();
                   }} />
               </Panel>
               <Panel bsStyle={emailStyle} header={emailHeader}>
@@ -169,7 +169,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
                 <DateTimePicker 
                   onChange={(name,value)=>{
                     this.props.setOpenPODateStart(name);
-                    this.props.openPOVendorDateRange();
+                    this.props.openPOEmailDateRange();
                   }}
                 defaultValue={this.props.ProdRpt.openPOEmail.dateStart} />
               </Col>
@@ -182,7 +182,7 @@ export default class OpenPOEmailDateTimeRange extends React.Component {
                 <DateTimePicker 
                   onChange={(name,value)=>{
                     this.props.setOpenPODateEnd(name);
-                    this.props.openPOVendorDateRange();
+                    this.props.openPOEmailDateRange();
                   }}
                 defaultValue={this.props.ProdRpt.openPOEmail.dateEnd} />
               </Col>
