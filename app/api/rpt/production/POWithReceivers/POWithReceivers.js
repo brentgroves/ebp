@@ -8,7 +8,7 @@ import * as ACTION from "../../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../../actions/rpt/production/State.js"
 import * as MISC from "../../../../const/Misc.js"
 import * as PROGRESSBUTTON from "../../../../const/ProgressButtonConst.js"
-import * as SQLPRIMEDB from "../../../../common/SQLPrimeDB.js"
+import * as SQLPRIMEDB from "../../../common/SQLPrimeDB.js"
 import * as SQLOPENPO from "./SQLOpenPO.js"
 
 //import * as hashLeftOuterJoin from "lodash-joins/lib/hash/hashLeftOuterJoin.js"

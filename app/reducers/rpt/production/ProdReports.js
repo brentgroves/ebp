@@ -1,6 +1,6 @@
 import * as ACTION from "../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../actions/rpt/production/State.js"
-import * as PROGRESSBUTTON from "../../../actions/common/ProgressButtonConst.js"
+import * as PROGRESSBUTTON from "../../../const/ProgressButtonConst.js"
 import update from 'react-addons-update';
 
 const initialState = { 
