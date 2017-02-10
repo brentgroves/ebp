@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GRReactDataGrid from '../../components/gr/GRReactDataGrid';
-import * as GRActions from '../../actions/gr/GRActions';
+import GRReactDataGrid from '../../../components/production/gr/GRReactDataGrid';
+import * as GRActions from '../../../actions/production/gr/GRActions';
 
 function mapStateToProps(state) {
   return {

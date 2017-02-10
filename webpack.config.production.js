@@ -62,6 +62,7 @@ export default validate(merge(baseConfig, {
      * Reduces total file size and is recommended
      */
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.IgnorePlugin(/vertx/),
 
     /**
      * Create global constants which can be configured at compile time.

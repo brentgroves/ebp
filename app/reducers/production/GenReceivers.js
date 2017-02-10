@@ -1,7 +1,7 @@
-import * as CHK from "../actions/common/ChkConst.js"
-import * as GRACTION from "../actions/gr/GRConst.js"
-import * as GRSTATE from "../actions/gr/GRState.js"
-import * as PROGRESSBUTTON from "../actions/common/ProgressButtonConst.js"
+import * as CHK from "../../actions/common/ChkConst.js"
+import * as GRACTION from "../../actions/production/gr/GRConst.js"
+import * as GRSTATE from "../../actions/production/gr/GRState.js"
+import * as PROGRESSBUTTON from "../../actions/common/ProgressButtonConst.js"
 import update from 'react-addons-update';
 
 const initialState = { 

@@ -3,7 +3,7 @@ import * as State from "./State.js"
 import { push } from 'react-router-redux';
 import * as OPENPOEMAIL from '../../../api/rpt/production/OpenPOEmail/OpenPOEmail';
 import * as PONORECEIVERS from '../../../api/rpt/production/PONoReceivers/PONoReceivers';
-import * as POWITHRECEIVERS from '../../../api/rpt/production/POWithReceivers/POWithNoReceivers';
+import * as POWITHRECEIVERS from '../../../api/rpt/production/POWithReceivers/POWithReceivers';
 import * as MISC from "../../../const/Misc.js"
 var _ = require('lodash');
 var joins = require('lodash-joins');
@@ -181,19 +181,6 @@ export function setOpenPOEmailDateEnd(dateEnd) {
 }
 
 
-export function openPOVendorEmail(poNumber) {
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.openPOVendorEmail()->top.`);
-  }
-
- return (dispatch,getState) => {
-    var disp = dispatch;
-    var getSt = getState;
-    OPENPOEMAIL.openPOVendorEmail(disp,getSt,poNumber);
-  };
-}
-
-
 export function setOpenPOEmailCurPage(curPage) {
   return {
     type: ACTION.SET_OPENPOEMAIL_CURPAGE,
@@ -245,7 +232,7 @@ export function toggleOpenPOEmailVisible(poNumber) {
 // PO With Receivers Start
 /////////////////////////////////////////////////////////////////
 
-export function POWithReceivers() {
+export function poWithReceivers() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.POWithReceivers()->top.`);
   }
@@ -253,31 +240,31 @@ export function POWithReceivers() {
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    POWITHRECEIVERS.POWithReceivers(disp,getSt);
+    POWITHRECEIVERS.poWithReceivers(disp,getSt);
   };
 }
 
-export function POWithReceiversPrompt() {
+export function poWithReceiversPrompt() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.POWithReceiversrompt()->top.`);
+    console.log(`ACTIONS.poWithReceiversrompt()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    POWITHRECEIVERS.POWithReceiversPrompt(disp,getSt);
+    POWITHRECEIVERS.poWithReceiversPrompt(disp,getSt);
   };
 }
 
-export function POWithReceiversDateRange() {
+export function poWithReceiversDateRange() {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.POWithReceiversDateRange()->top.`);
+    console.log(`ACTIONS.poWithReceiversDateRange()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    POWITHRECEIVERS.POWithReceiversDateRange(disp,getSt);
+    POWITHRECEIVERS.poWithReceiversDateRange(disp,getSt);
   };
 }
 

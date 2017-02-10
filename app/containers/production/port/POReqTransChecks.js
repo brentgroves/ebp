@@ -1,8 +1,8 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import POReqTransChecks from '../../components/port/POReqTransChecks';
-import * as POReqTrans from '../../actions/port/POReqTrans';
+import POReqTransChecks from '../../../components/production/port/POReqTransChecks';
+import * as POReqTrans from '../../../actions/production/port/POReqTrans';
 
 function mapStateToProps(state) {
   return {

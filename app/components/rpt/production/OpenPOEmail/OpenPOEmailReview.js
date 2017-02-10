@@ -1,12 +1,8 @@
-//require('../../react-pivot/example/demo.css')
 import React, { Component, PropTypes } from 'react';
 import { Row,Col,ListGroup,ListGroupItem,Panel,Table,Button,Glyphicon,ButtonGroup,ButtonToolbar} from 'react-bootstrap';
 var classNames = require('classnames');
-import * as STATE from "../../actions/Rpt/State.js"
-
-
-//require('../../css/Rpt/styles.css')
-import styles from '../../css/Rpt/styles.css';
+import * as STATE from "../../../../actions/rpt/production/State.js"
+import styles from '../../../../css/rpt/production/styles.css';
 var sorty    = require('sorty')
 var _ = require('lodash');
 var joins = require('lodash-joins');
@@ -33,17 +29,7 @@ class PORow extends React.Component {
       visible:this.props.poItem.visible
     };
   }
-/*
-    if(this.state.poItem.selected){
-      checkbox=<input type="checkbox" onChange={()=>this.state.toggleOpenPOSelected(fpono)}/>     
-    }else{
-      checkbox=<input type="checkbox" onChange={()=>this.state.toggleOpenPOSelected(fpono)} />     
-    }
-    */
   render() {
-//    var poNumber=this.props.poItem.poNumber;
-//    var vendorName=this.props.poItem.vendorName;
-//    var eMailAddress=this.props.poItem.eMailAddress;
     var selected=this.props.poItem.selected;
     if ('development'==process.env.NODE_ENV) {
       console.log(`PORow:poNumber=>${this.state.poNumber}`);
@@ -146,8 +132,8 @@ class OpenPOTable extends React.Component {
     }
     var poItem=this.props.poItem;
     var curPage=this.props.curPage;
-    var toggleOpenPOSelected=this.props.toggleOpenPOSelected;
-    var toggleOpenPOVisible=this.props.toggleOpenPOVisible;
+    var toggleOpenPOEmailSelected=this.props.toggleOpenPOEmailSelected;
+    var toggleOpenPOEmailVisible=this.props.toggleOpenPOEmailVisible;
     if ('development'==process.env.NODE_ENV) {
       console.log(`OpenPOTable.render().curPage=>${curPage}`);
     }
@@ -160,8 +146,8 @@ class OpenPOTable extends React.Component {
         }
         if(curPage==poItem.page){
           rows.push(<PORow 
-                      toggleOpenPOSelected={toggleOpenPOSelected} 
-                      toggleOpenPOVisible={toggleOpenPOVisible}
+                      toggleOpenPOEmailSelected={toggleOpenPOEmailSelected} 
+                      toggleOpenPOEmailVisible={toggleOpenPOEmailVisible}
                       poItem={poItem} key={poItem.poNumber} />);          
         }
 
@@ -195,23 +181,10 @@ class OpenPOTable extends React.Component {
   }
 }
 
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <form>
-        <input type="text" placeholder="Search..." />
-        <p>
-          <input type="checkbox" />
-          {' '}
-          Only show products in stock
-        </p>
-      </form>
-    );
-  }
-}
-export default class POPrompt extends React.Component {
+
+export default class OpenPOEmailReview extends React.Component {
   static propTypes = {
-    Rpt: PropTypes.object.isRequired
+    ProdRpt: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -220,8 +193,8 @@ export default class POPrompt extends React.Component {
       test:this.test.bind(this)
     };
     if ('development'==process.env.NODE_ENV) {
-      console.log(`POPrompt:this.props.toggleOpenPOSelected=>`);
-      console.dir(this.props.toggleOpenPOSelected);
+      console.log(`POPrompt:this.props.toggleOpenPOEmailSelected=>`);
+      console.dir(this.props.toggleOpenPOEmailSelected);
     }
   }
  
@@ -231,56 +204,41 @@ export default class POPrompt extends React.Component {
 
   render() {
     
-    var footerClass = classNames(
-      'panel-footer'
-    );
-    var col4Class = classNames(
-      'col','col-xs-4'
-    );
-    var col8Class = classNames(
-      'col','col-xs-8'
-    );
     var pageClass = classNames(
       'pagination','hidden-xs', 'pull-right'
     );
     var pageNoClass = classNames(
       'pagination','hidden-xs', 'pull-left'
     );
-
-    var btnSpaceClass = classNames(
-      'btnSpace'
-    );
-
-
     var pages = [];
-    var poItem=this.props.Rpt.openPO.poItem;
-    var curPage=this.props.Rpt.openPO.curPage;
-    var maxPage=this.props.Rpt.openPO.maxPage;
-    var prevPage=this.props.Rpt.openPO.prevPage;
-    var nextPage=this.props.Rpt.openPO.nextPage;
+    var poItem=this.props.ProdRpt.openPOEmail.poItem;
+    var curPage=this.props.ProdRpt.openPOEmail.curPage;
+    var maxPage=this.props.ProdRpt.openPOEmail.maxPage;
+    var prevPage=this.props.ProdRpt.openPOEmail.prevPage;
+    var nextPage=this.props.ProdRpt.openPOEmail.nextPage;
     if ('development'==process.env.NODE_ENV) {
-      console.log(`POPrompt.Render().curPage=>${curPage}`);
-      console.log(`POPrompt.Render().maxPage=>${maxPage}`);
-      console.log(`POPrompt.Render().prevPage=>${prevPage}`);
-      console.log(`POPrompt.Render().nextPage=>${nextPage}`);
+      console.log(`OpenPOEmailReview.Render().curPage=>${curPage}`);
+      console.log(`OpenPOEmailReview.Render().maxPage=>${maxPage}`);
+      console.log(`OpenPOEmailReview.Render().prevPage=>${prevPage}`);
+      console.log(`OpenPOEmailReview.Render().nextPage=>${nextPage}`);
     }
 
     for(var x=1;x<=maxPage;x++){
         let page=x;
-        pages.push(<li key={x}><a onClick={()=>{this.props.setOpenPOCurPage(page)}}>{x}</a></li>);
+        pages.push(<li key={x}><a onClick={()=>{this.props.setOpenPOEmailCurPage(page)}}>{x}</a></li>);
     }
   const rpt1Style = {
     fontWeight:'bold'
   };
     var saveAndBackBtn;
     if(
-        (STATE.PO_PROMPT_NOT_READY==this.props.Rpt.state) 
+        (STATE.OPENPOEMAIL_REVIEW_NOT_READY==this.props.ProdRpt.state) 
       ){
 
       saveAndBackBtn = 
       <div>
         <Col xs={1}>
-          <Button disabled style={{marginTop:15}} bsSize="large" bsStyle="success" onClick={()=>this.props.OpenPOVendorEmailReport()}>Run</Button>
+          <Button disabled style={{marginTop:15}} bsSize="large" bsStyle="success" onClick={()=>this.props.openPOEmailReport()}>Run</Button>
         </Col>
         <Col xs={2}>
           <Button  style={{marginTop:15,marginLeft:15}} bsSize="large" bsStyle="info" onClick={()=>this.props.setState(STATE.OPENPO_DATE_RANGE_READY)}>Back</Button>
@@ -290,7 +248,7 @@ export default class POPrompt extends React.Component {
       saveAndBackBtn = 
       <div>
         <Col xs={1}>
-          <Button style={{marginTop:15}} bsSize="large" bsStyle="success" onClick={()=>this.props.OpenPOVendorEmailReport()}>Run</Button>
+          <Button style={{marginTop:15}} bsSize="large" bsStyle="success" onClick={()=>this.props.OpenPOEmailReport()}>Run</Button>
         </Col>
         <Col xs={2}>
           <Button  style={{marginTop:15,marginLeft:15}} bsSize="large" bsStyle="info" onClick={()=>this.props.setState(STATE.OPENPO_DATE_RANGE_READY)}>Back</Button>
@@ -301,8 +259,8 @@ export default class POPrompt extends React.Component {
     return (
       <div>
           <OpenPOTable poItem={poItem} curPage={curPage}
-            toggleOpenPOSelected={this.props.toggleOpenPOSelected} 
-            toggleOpenPOVisible={this.props.toggleOpenPOVisible}/>
+            toggleOpenPOEmailSelected={this.props.toggleOpenPOEmailSelected} 
+            toggleOpenPOEmailVisible={this.props.toggleOpenPOEmailVisible}/>
                 <Row>
                   <Col xs={3}>
                     <ul className={pageNoClass}>
@@ -325,64 +283,3 @@ export default class POPrompt extends React.Component {
 }
 
 
-/*
-            <table className={styles.tg}>
-            <tbody>
-              <tr>
-                <td className={styles.btnPrimary} onClick={()=>this.props.setState(STATE.NOT_STARTED)} ><span style={rpt1Style}>Back</span></td>
-                <td className={styles.btnSuccess} onClick={()=>this.props.OpenPOVendorEmailReport()} ><span style={rpt1Style}>Run</span></td>
-              </tr>
-              </tbody>
-            </table>
-                  </Col>
-                   <Col xs={6}>
-                    <ul className={pageClass}>
-                      <li><a onClick={()=>{this.props.setOpenPOPrevPage()}}>«</a></li>
-                      <li><a onClick={()=>{this.props.setOpenPONextPage()}}>»</a></li>
-                      {pages}  
-                    </ul>
-                  </Col>
-                </Row>
-
-
-                    <ul className={pageClass}>
-                      <li>
-                        <Button  bsSize="large" bsStyle="info" onClick={()=>this.props.setState(STATE.NOT_STARTED)} >Back
-                        </Button>
-                      </li>
-                      <li>
-                      {"      "}
-                      </li>
-                      <li>
-                      {"      "}
-                      </li>
-                      <li className={btnSpaceClass}>
-                        <Button  bsSize="large" bsStyle="success" onClick={()=>this.props.OpenPOVendorEmailReport()} >Run
-                        </Button>
-                      </li>
-                    </ul>
-
-
-        <Button bsSize="xsmall">
-          <Glyphicon glyph="chevron-down" />
-        </Button>     
-
-
-        <Panel style={{padding:0}} footer={test} collapsible expanded={this.state.open}>
-          <OpenPOTable openPO={this.state.openPO} 
-            toggleOpenPOSelected={this.state.toggleOpenPOSelected} 
-            toggleOpenPOVisible={this.state.toggleOpenPOVisible}/>
-        </Panel>
-
-    var btnClass = classNames({
-      'btn': true,
-      'btn-pressed': this.state.isPressed,
-      'btn-over': !this.state.isPressed && this.state.isHovered
-    });
-    return <button className={btnClass}>{this.props.label}</button>;
-                    <ul className="pagination visible-xs pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-
-*/

@@ -1,8 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import POCategories from '../../components/port/POCategories';
-//import * as POUpdateAppActions from '../actions/POUpdateApp';
-import * as POReqTrans from '../../actions/port/POReqTrans';
+import POCategories from '../../../components/production/port/POCategories';
+import * as POReqTrans from '../../../actions/production/port/POReqTrans';
 
 function mapStateToProps(state) {
   return {

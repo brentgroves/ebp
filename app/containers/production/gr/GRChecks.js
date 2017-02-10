@@ -1,8 +1,8 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GRChecks from '../../components/gr/GRChecks';
-import * as GRActions from '../../actions/gr/GRActions';
+import GRChecks from '../../../components/production/gr/GRChecks';
+import * as GRActions from '../../../actions/production/gr/GRActions';
 
 function mapStateToProps(state) {
   return {

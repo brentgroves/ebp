@@ -2,7 +2,7 @@ var sql = require('mssql');
 
 import * as PORTACTION from "../../../actions/production/port/PORTActionConst.js"
 import * as PORTSTATE from "../../../actions/production/port/PORTState.js"
-import * as PORTCHK from "../../../actions/common/ChkConst.js"
+import * as PORTCHK from "../../../const/ChkConst.js"
 import * as CONNECT from "../../../const/SQLConst.js"
 import * as MISC from "../../../const/Misc.js"
 

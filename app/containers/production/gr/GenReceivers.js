@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GenReceivers from '../../components/gr/GenReceivers';
-import * as GRActions from '../../actions/gr/GRActions';
+import GenReceivers from '../../../components/production/gr/GenReceivers';
+import * as GRActions from '../../../actions/production/gr/GRActions';
 
 function mapStateToProps(state) {
   return {

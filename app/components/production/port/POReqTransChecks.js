@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import {LinkContainer} from 'react-router-bootstrap';
 import { Grid, Row, Glyphicon, Col, Button} from 'react-bootstrap';
 import * as PORTSTATE from "../../../actions/production/port/PORTState.js"
-import * as PORTCHK from "../../../actions/common/ChkConst.js"
+import * as PORTCHK from "../../../const/ChkConst.js"
 
 
 export default class POReqTransChecks extends Component {

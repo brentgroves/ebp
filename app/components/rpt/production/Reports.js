@@ -1,4 +1,4 @@
-import styles from '../../css/Rpt/styles.css';
+import styles from '../../../css/Rpt/styles.css';
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Link,IndexLink } from 'react-router';
@@ -10,8 +10,8 @@ import {Header as NavbarHeader, Brand as NavbarBrand, Toggle as NavbarToggle, Co
 import ProgressBtn from '../../../containers/rpt/common/ProgressBtn';
 import NoReceiversDateRange from "../../../containers/rpt/production/PONoReceivers/PONoReceiversDateRange";
 import ClosedPODateRange from "../../../containers/rpt/production/POWithReceivers/POWithReceiversDateRange";
-import POPrompt from "../../../containers/rpt/production/OpenPOEmail/POPrompt";
-import DateTimeRange from "../../../containers/rpt/production/OpenPOEmail/DateTimeRange";
+import OpenPOEmailReview from "../../../containers/rpt/production/OpenPOEmail/OpenPOEmailReview";
+import OpenPOEmailDateTimeRange from "../../../containers/rpt/production/OpenPOEmail/OpenPOEmailDateTimeRange";
 var Moment = require('moment');
 
 
@@ -42,7 +42,7 @@ export default class Reports extends Component {
     // OPEN PO EMAIL Start
     /////////////////////////////////////////////////////////////////
 
-    if(STATE.OPENPOEMAIL_PROMPT_NOT_READY==this.props.Rpt.state) {
+    if(STATE.OPENPOEMAIL_REVIEW_NOT_READY==this.props.Rpt.state) {
       jumboTronTxt=
         <Row >
           <Col xs={1}>&nbsp;</Col>
@@ -62,7 +62,7 @@ export default class Reports extends Component {
         </Row>;
     }
 
-    if(STATE.OPENPOEMAIL_PROMPT_READY==this.props.Rpt.state){
+    if(STATE.OPENPOEMAIL_REVIEW_READY==this.props.Rpt.state){
       jumboTronTxt=
         <Row >
           <Col xs={1}>&nbsp;</Col>
@@ -83,18 +83,18 @@ export default class Reports extends Component {
         </Row>;
     }
     if(
-        (STATE.OPENPOEMAIL_PROMPT_NOT_READY==this.props.Rpt.state) ||
-        (STATE.OPENPOEMAIL_PROMPT_READY==this.props.Rpt.state)
+        (STATE.OPENPOEMAIL_REVIEW_NOT_READY==this.props.Rpt.state) ||
+        (STATE.OPENPOEMAIL_REVIEW_READY==this.props.Rpt.state)
       )
     {
-      poPrompt = 
+      openPOEmailReview = 
       <div>
         <Row>
           <Col xs={1}>&nbsp;</Col>
         </Row>
         <Row>
           <Col xs={1} >&nbsp;</Col>
-          <Col xs={10}><POPrompt/></Col>
+          <Col xs={10}><OpenPOEmailReview/></Col>
           <Col xs={1}>&nbsp;</Col>
         </Row>
       </div>;
@@ -216,7 +216,7 @@ export default class Reports extends Component {
     /////////////////////////////////////////////////////////////////
     // PO With Receivers Start
     /////////////////////////////////////////////////////////////////
-    If(STATE.POWITHRECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state){
+    if(STATE.POWITHRECEIVERS_DATE_RANGE_NOT_READY==this.props.Rpt.state){
       jumboTronTxt=
         <Row >
           <Col xs={1}>&nbsp;</Col>
@@ -291,7 +291,7 @@ export default class Reports extends Component {
           <Row>
             <Col xs={5} >&nbsp;</Col>
             <Col xs={2}><Button  onClick={()=> {
-                                  this.props.setState(STATE.CLOSEDPO_DATE_RANGE_READY);
+                                  this.props.setState(STATE.POWITHRECEIVERS_DATE_RANGE_READY);
                                 }} bsSize="large" bsStyle="warning">Back</Button></Col>
             <Col xs={5}>&nbsp;</Col>
           </Row>
@@ -509,7 +509,7 @@ export default class Reports extends Component {
                   <td className={styles.btnSuccess} 
                   onClick={()=>{this.props.openPOEMail();}}>
                   <span style={rpt1Style}>Open PO</span><br/>MRO/Vendor Email</td>
-                  <td className={styles.btnWarning} onClick={()=>{this.props.ClosedPOPrompt();}} ><span style={rpt1Style}>PO(s) with Receivers</span><br/>PDF format</td>
+                  <td className={styles.btnWarning} onClick={()=>{this.props.poWithReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with Receivers</span><br/>PDF format</td>
                 </tr>
                 </tbody>
               </table>
@@ -602,7 +602,7 @@ export default class Reports extends Component {
         {backBtn}
         {cancelBtn}
         {navbar}
-      </Grid>;
+      </Grid>
     );
   }
 }

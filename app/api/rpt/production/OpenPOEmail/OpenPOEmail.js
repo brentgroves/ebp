@@ -7,7 +7,7 @@ import * as ACTION from "../../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../../actions/rpt/production/State.js"
 import * as MISC from "../../../../const/Misc.js"
 import * as PROGRESSBUTTON from "../../../../const/ProgressButtonConst.js"
-import * as SQLPRIMEDB from "../../../../const/SQLPrimeDB.js"
+import * as SQLPRIMEDB from "../../../common/SQLPrimeDB.js"
 import * as SQLOPENPO from "./SQLOpenPO.js"
 import * as SQLOPENPOVENDOREMAIL from "./SQLOpenPOVendorEmail.js"
 
@@ -24,100 +24,6 @@ var client = require("jsreport-client")('http://localhost:5488', 'admin', 'passw
 
 
 
-
-export async function POVendorEmail(disp,getSt) {
-  var dispatch = disp;
-  var getState = getSt;
-  var continueProcess=true;
-
-
-  //remote.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']})
-  dispatch({ type:ACTION.SET_PROGRESS_BTN,progressBtn:PROGRESSBUTTON.LOADING });
-  dispatch({ type:ACTION.SET_STATE, state:STATE.STARTED });
-
-  var dirName=remote.app.getPath('temp');
-
-  if ('development'==process.env.NODE_ENV) {
-    console.log(`remote = } `);
-    console.dir(remote);
-    console.log(` dirName: ${ dirName}`);
-  }
-
-  if(continueProcess){
-    client.render({
-
-  //      template: { shortid:"HJEa3YSNl"}
-        template: { shortid:"SkVLXedVe"} // sample report
-//http://10.1.1.217:5488/templates/B1WBsctr4e
-  //      template: { content: "hello {{:someText}}", recipe: "html",
-  //                  engine: "jsrender" },
-  //      data: { someText: "world!!" }
-    }, function(err, response) {
-        var dirName1 = dirName;
-
-        if ('development'==process.env.NODE_ENV) {
-          console.log(`dirName: ${dirName}`);
-          console.log(`dirName1: ${dirName1}`);
-          console.log(`err =  `);
-          console.dir(err);
-        }
-      //dispatch({ type:GRACTION.SET_REASON, reason:err.message });
-      //dispatch({ type:GRACTION.SET_STATE, state:GRSTATE.FAILURE });
-      //dispatch({ type:GRACTION.LOG_ENTRY_LAST_FAILED, failed:true });
-
-        response.body(function(body) {
-          var dirName2 = dirName1;
-          let fileName =  dirName2 + '/myfile.pdf';
-          if ('development'==process.env.NODE_ENV) {
-            console.log(`dirName: ${dirName}`);
-            console.log(`dirName1: ${dirName1}`);
-            console.log(`dirName2: ${dirName2}`);
-            console.log(`fileName: ${fileName}`);
-          }
-
-          fs.writeFileSync(fileName,body);
-//          fs.writeFileSync('/home/brent/myfile.pdf',body);
-          dispatch({ type:ACTION.SET_POSTATUS_REPORT_DONE, done:true });
-          if ('development'==process.env.NODE_ENV) {
-            console.log(`Done creating file myfile.pdf `);
-            console.log(`fileName: ${fileName}`);
-          }
-          ipcRenderer.send('asynchronous-message', fileName)
-          //dispatch({ type:GRACTION.SET_POSTATUS_REPORT_PDF, pdf:body });
-        });
-    });
-
-    var cnt=0;
-    var maxCnt=40;
-    while(!getState().Reports.poStatusReport.done){
-      if(++cnt>maxCnt){
-        continueProcess=false;
-        break;
-      }else{
-        await MISC.sleep(2000);
-      }
-    }
-
-    if(getState().Reports.poStatusReport.failed || 
-      !getState().Reports.poStatusReport.done){
-      if ('development'==process.env.NODE_ENV) {
-        console.log(`POStatusReport not successful.`);
-      }
-      dispatch({ type:ACTION.SET_REASON, reason:`Network or server problem preventing access to the Report Server. `});
-      dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
-      dispatch({ type:ACTION.SET_STATUS, status:'Can not connect to Report Server...' });
-      continueProcess=false;
-    }else{
-      if ('development'==process.env.NODE_ENV) {
-        console.log(`POStatusReport Success.`);
-      }
-      
-      dispatch({type:ACTION.INIT_NO_STATE});
-      dispatch({ type:ACTION.SET_STATE, state:STATE.SUCCESS});
-    }
-  }
-
-}
 
 
 export async function openPOEmailDateRange(disp,getSt) {
@@ -249,7 +155,7 @@ export async function openPOVendorEmail(disp,getSt) {
   var cnt=0;
   var maxCnt=10;
   var state=getState();
-  var openPO=getState().Reports.openPO;
+  var openPOEmail=getState().ProdReports.openPOEmail;
 
   dispatch({ type:ACTION.SET_PROGRESS_BTN,progressBtn:PROGRESSBUTTON.LOADING });
   dispatch({ type:ACTION.SET_STATE, state:STATE.STARTED });
@@ -307,7 +213,7 @@ export async function openPOVendorEmail(disp,getSt) {
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
       dispatch({ type:ACTION.SET_STATUS, status:'Can not run bpOpenPOVendorEmail sproc on Cribmaster...' });
       continueProcess=false;
-    }else if(0<getState().Reports.openPO.poItem.length){
+    }else if(0<getState().ProdReports.openPOEmail.poItem.length){
       if ('development'==process.env.NODE_ENV) {
         console.log(`SQLOPENPOVENDOREMAIL.sql1() Success.`);
       }
@@ -348,9 +254,9 @@ export async function openPOVendorEmail(disp,getSt) {
 
   if(continueProcess){
     if(0<getState().ProdReports.openPOEmail.select.length){
-      dispatch({ type:ACTION.SET_STATE, state:STATE.PO_PROMPT_READY });
+      dispatch({ type:ACTION.SET_STATE, state:STATE.OPENPOEMAIL_REVIEW_READY });
     }else{
-      dispatch({ type:ACTION.SET_STATE, state:STATE.PO_PROMPT_NOT_READY });
+      dispatch({ type:ACTION.SET_STATE, state:STATE.OPENPOEMAIL_REVIEW_NOT_READY });
     }
   }
 
@@ -364,10 +270,6 @@ export async function ToggleOpenPOVisible(disp,getSt,po) {
   var continueProcess=true;
   var cnt=0;
   var maxCnt=10;
-
-
-//  var openPO = getState().Reports.openPO;
-//  var poItem = getState().Reports.openPO.poItem;
   var poNumber = po;
 
   if ('development'==process.env.NODE_ENV) {
@@ -563,15 +465,15 @@ export function openPOPager(disp,getSt) {
 
 }
 
-export async function OpenPOVendorEmailReport(disp,getSt) {
+export async function OpenPOEmailReport(disp,getSt) {
   var dispatch = disp;
   var getState = getSt;
   dispatch({ type:ACTION.SET_PROGRESS_BTN,progressBtn:PROGRESSBUTTON.LOADING });
   dispatch({ type:ACTION.SET_STATE, state:STATE.STARTED });
   var curPO='start';
-  var emailMRO=getState().Reports.openPO.emailMRO;
-  var emailVendor=getState().Reports.openPO.emailVendor;
-  getState().Reports.openPO.poItem.map(function(x){
+  var emailMRO=getState().ProdReports.openPOEmail.emailMRO;
+  var emailVendor=getState().ProdReports.openPOEmail.emailVendor;
+  getState().ProdReports.openPOEmail.poItem.map(function(x){
     if(x.selected && curPO!=x.poNumber){
       var emailTo=null;
       if(emailMRO){
@@ -587,8 +489,8 @@ export async function OpenPOVendorEmailReport(disp,getSt) {
       }
 //Administrator@busche-cnc.com
       if ('development'==process.env.NODE_ENV) {
-        console.log(`OpenPOVendorEmailReport.poNumber=${x.poNumber}`);
-        console.log(`OpenPOVendorEmailReport.poNumber=${x.eMailAddress}`);
+        console.log(`OpenPOEmailReport.poNumber=${x.poNumber}`);
+        console.log(`OpenPOEmailReport.poNumber=${x.eMailAddress}`);
         console.log(`emailTo=${emailTo}`);
       }
 

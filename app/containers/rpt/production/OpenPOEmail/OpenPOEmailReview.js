@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import OpenPOEmailDateTimeRange from '../../../../components/rpt/production/OpenPOEmail/OpenPOEmailDateTimeRange';
+import OpenPOEmailReview from '../../../../components/rpt/production/OpenPOEmail/OpenPOEmailReview';
 import * as Actions from '../../../../actions/rpt/production/Actions';
 
 function mapStateToProps(state) {
@@ -13,6 +13,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OpenPOEmailDateTimeRange);
+export default connect(mapStateToProps, mapDispatchToProps)(OpenPOEmailReview);
 
 

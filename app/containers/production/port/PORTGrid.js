@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PORTGrid from '../../components/port/PORTGrid';
-import * as POReqTrans from '../../actions/port/POReqTrans';
+import PORTGrid from '../../../components/production/port/PORTGrid';
+import * as POReqTrans from '../../../actions/production/port/POReqTrans';
 
 function mapStateToProps(state) {
   return {

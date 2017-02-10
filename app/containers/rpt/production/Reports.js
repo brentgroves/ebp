@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Reports from '../../components/Rpt/Reports';
-import * as Actions from '../../actions/Rpt/Actions';
+import Reports from '../../../components/rpt/production/Reports';
+import * as Actions from '../../../actions/rpt/production/Actions';
 
 function mapStateToProps(state) {
   return {
